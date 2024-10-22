@@ -19,7 +19,7 @@
                 <li><a href="about.php">About Us</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact Us</a></li>
-                <li><a href="join.php">Embark</a></li> <!-- Link to Join Us page -->
+                <li><a href="login.php">Login</a></li> <!-- Link to Join Us page -->
             </ul>
         </nav>
     </header>
