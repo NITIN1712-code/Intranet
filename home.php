@@ -9,6 +9,9 @@
 <body>
     <!-- Header -->
     <header>
+    <img src="images/g.png" alt="Explore Mauritius Logo" class="logo" />
+
+        
         <h1>Explore Mauritius</h1>
         <nav>
             <ul>
@@ -35,19 +38,24 @@
             <h3>Our Tours</h3>
             <div class="tour-cards">
                 <article class="tour-card">
-                    <img src="tour1.jpg" alt="Island Hopping Tour">
+                <img src="images/grse.jpg" alt="Island Hopping Tour">
                     <h4>Island Hopping Adventure</h4>
                     <p>Experience the breathtaking beauty of Mauritius with our exclusive island hopping tour.</p>
                 </article>
                 <article class="tour-card">
-                    <img src="tour2.jpg" alt="Wildlife Safari Tour">
+                    <img src="images/safari.jpg" alt="Wildlife Safari Tour">
                     <h4>Wildlife Safari</h4>
-                    <p>Discover the rich wildlife of Mauritius on an unforgettable safari.</p>
+                    <p>Discover the rich wildlife of Mauritius on an unforgettable safari at Casela.</p>
                 </article>
                 <article class="tour-card">
-                    <img src="tour3.jpg" alt="Underwater Exploration Tour">
+                    <img src="images/seawalk.jpg" alt="Underwater Exploration Tour">
                     <h4>Underwater Exploration</h4>
                     <p>Join us for an exciting underwater adventure and explore the vibrant marine life.</p>
+                </article>
+                <article class="tour-card">
+                    <img src="images/odysseo.jpg" alt="Underwater Exploration Tour">
+                    <h4>Discover the wonder of the quatic animal world</h4>
+                    <p>Welcome to the largest oceanarium in the Mascarene Archipelago and the first of its kind in Mauritius.</p>
                 </article>
             </div>
         </section>
@@ -68,6 +76,10 @@
                     <h4>24/7 Support</h4>
                     <p>We're here for you 24/7 to assist you during your travels.</p>
                 </article>
+                <article class="service">
+                    <h4>Car Rental and Hotel & Accommodation</h4>
+                    <p>We offer convenient car rental offers, allowing customers to explore Mauritius with ease. We also offer a range of hotel and accommodation options to suit every preference, ensuring a comfortable stay. Our services are tailored to create a seamless and enjoyable travel experience for our clients..</p>
+                </article>
             </div>
         </section>
 
@@ -87,6 +99,7 @@
                 <textarea rows="5" placeholder="Your Message" required></textarea>
                 <button type="submit">Send Message</button>
             </form>
+            <p>Or email us directly at: <a href="mailto:"info@exploremauritius.com">info@exploremauritius.com
         </section>
     </main>
 

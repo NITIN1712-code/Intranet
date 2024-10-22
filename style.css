@@ -10,10 +10,19 @@ body {
 /* Header */
 header {
     background-color: #ffffff; /* White */
-    color: #4CAF50; /* Apple Green */
+    color: #00a88f; /* Apple Green */
     padding: 20px;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+/*logo*/
+.logo {
+    max-width: 150px;
+    height: auto;
+}
+.logo img {
+    max-width: 100px; /* Adjust size as needed */
+    height: auto;
 }
 
 header h1 {
@@ -40,7 +49,7 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: #4CAF50; /* Apple Green */
+    color: #00a88f /* Apple Green */
     font-weight: bold;
     transition: color 0.3s ease;
 }
@@ -73,7 +82,7 @@ nav ul li a:hover {
 
 /* Call to Action Button */
 .cta-button {
-    background-color: #4CAF50; /* Apple Green */
+    background-color: #00a88f; /* Apple Green */
     color: white;
     padding: 10px 20px;
     border: none;
@@ -106,7 +115,7 @@ nav ul li a:hover {
 .tours-section h3 {
     font-size: 36px;
     margin-bottom: 30px;
-    color: #4CAF50; /* Apple Green */
+    color:#00a88f; /* Apple Green */
 }
 
 .tour-cards {
@@ -175,7 +184,7 @@ nav ul li a:hover {
 .contact-section h3 {
     font-size: 36px;
     margin-bottom: 30px;
-    color: #4CAF50; /* Apple Green */
+    color: #00a88f; /* Apple Green */
 }
 
 .contact-section form {
@@ -189,13 +198,13 @@ nav ul li a:hover {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 2px solid #4CAF50; /* Apple Green */
+    border: 2px solid #00a88f; /* Apple Green */
     border-radius: 5px;
     font-size: 16px;
 }
 
 .contact-section button {
-    background-color: #4CAF50; /* Apple Green */
+    background-color: #00a88f; /* Apple Green */
     color: white;
     padding: 10px 20px;
     border: none;
@@ -236,7 +245,7 @@ nav ul li a:hover {
 
 /* Footer */
 footer {
-    background-color: #4CAF50; /* Apple Green */
+    background-color: #00a88f; /* Apple Green */
     color: #fff;
     text-align: center;
     padding: 20px;
