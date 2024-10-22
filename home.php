@@ -54,7 +54,7 @@
                 </article>
                 <article class="tour-card">
                     <img src="images/odysseo.jpg" alt="Underwater Exploration Tour">
-                    <h4>Discover the wonder of the quatic animal world</h4>
+                    <h4>Discover the wonder of the aquatic animal world</h4>
                     <p>Welcome to the largest oceanarium in the Mascarene Archipelago and the first of its kind in Mauritius.</p>
                 </article>
             </div>
