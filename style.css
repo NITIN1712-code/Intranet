@@ -275,6 +275,35 @@ footer {
         font-size: 36px;
     }
 }
+.hero-section {
+    background-image: url('https://www.mauritiusbookings.com/modules/imgpool/images/18.jpg'); /* Replace with your image path */
+    background-size: cover; /* Ensures the image covers the entire section */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    height: 110vh; /* Makes the section take up the full viewport height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white; /* Ensures text is visible over the background */
+    padding: 0 20px; /* Adds some padding */
+}
+
+.cta-button {
+    background-color: #00a88f;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #00a88f;
+}
+
 
 
 

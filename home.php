@@ -9,7 +9,7 @@
 <body>
     <!-- Header -->
     <header>
-    <img src="images/g.png" alt="Explore Mauritius Logo" class="logo" />
+    <img src="images/g2.jpg" alt="Explore Mauritius Logo" class="logo" />
 
         
         <h1>Explore Mauritius</h1>
