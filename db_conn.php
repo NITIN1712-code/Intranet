@@ -2,7 +2,7 @@
 
 $sname= "localhost";
 $unmae= "root";
-$password = "1234";
+$password = "";
 
 $db_name = "tourop";
 
