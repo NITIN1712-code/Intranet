@@ -25,28 +25,19 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
         $sqlAdmin = "SELECT * FROM admins WHERE password=? AND username=?";
         $stmt1 = mysqli_prepare($conn, $sqlAdmin);
 
-        if ($stmt1 === false) {
-            die('Prepare failed: ' . htmlspecialchars(mysqli_error($conn)));
-        }
+		$sqlAdmin = "SELECT * FROM admins WHERE username=? AND password=?";
 
-        mysqli_stmt_bind_param($stmt1, "s", $uname);
-        mysqli_stmt_execute($stmt1);
-        $result1 = mysqli_stmt_get_result($stmt1);
-
-        if (mysqli_num_rows($result1) === 1) {
-            // Fetch the admin row
-            $row1 = mysqli_fetch_assoc($result1);
-            // Verify the password
-            if (password_verify($pass, $row1['password'])) {
-                // Password is correct
-                $_SESSION['username'] = $row1['username']; // Store session data
-                header("Location: admin_dashboard.php");
-                exit();
-            } else {
-                header("Location: login.php?error=Incorrect password for admin");
-                exit();
-            }
-        }
+		
+		$stmt1 = mysqli_prepare($conn, $sqlAdmin);
+		mysqli_stmt_bind_param($stmt1, "ss", $uname, $pass);
+		mysqli_stmt_execute($stmt1);
+		$result1 = mysqli_stmt_get_result($stmt1);
+		echo $pass;
+		if(mysqli_num_rows($result1) === 1){
+			header("Location: admin_dashboard.php");
+			mysqli_close($conn);
+			exit();
+		}
 
         // Check in the employees table
         $sqlEmp = "SELECT * FROM employees WHERE username=?";
