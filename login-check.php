@@ -29,7 +29,6 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
 		mysqli_stmt_bind_param($stmt1, "ss", $uname, $pass);
 		mysqli_stmt_execute($stmt1);
 		$result1 = mysqli_stmt_get_result($stmt1);
-		echo $pass;
 		if(mysqli_num_rows($result1) === 1){
 			header("Location: admin_dashboard.php");
 			mysqli_close($conn);
