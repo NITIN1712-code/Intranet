@@ -212,7 +212,7 @@ $conn->close();
     <!-- Display the tables here -->
     <?php
     // Re-establish connection to the database for fetching table data after the header
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = new mysqli($servername, $username, $password, $dbname, $port);
 
     // Display the tables
     displayTable($conn, "SELECT * FROM tours", "Tours");
