@@ -101,20 +101,21 @@ footer {
 }
 
 /* Style the employee options list */
-.employee-options {
+.options {
     list-style-type: none;
     padding-left: 0;
 }
 
-.employee-options li {
-    margin-bottom: 10px;
+.options li {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
-.employee-options li a {
+.options li a {
     color: #007BFF;
     text-decoration: none;
 }
 
-.employee-options li a:hover {
+.options li a:hover {
     text-decoration: underline;
 }

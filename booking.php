@@ -1,17 +1,6 @@
 <?php
-// Database connection
-$servername = "localhost";
-$username = "root"; // Adjust these based on your database credentials
-$password = "";
-$dbname = "tourop";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require("db_conn.php");
 
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

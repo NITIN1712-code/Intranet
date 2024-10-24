@@ -20,23 +20,28 @@
 
         <main>
             <section class="info-cards">
-                <a href="employees.php" class="card-link">
-                    <div class="card">
+                <div class="card">
+                    <a href="employees.php" class="card-link">
                         <h2>Employees</h2>
                         <p>Manage Employees here</p>
                         <!-- Options for managing employees -->
-                        <ul class="employee-options">
+                        <ul class="options">
                             <li><a href="add_emp.php">Add Employee</a></li>
-                            <li><a href="edit_emp.php">Edit Employee</a></li>
                             <li><a href="delete_emp.php">Delete Employee</a></li>
                             <li><a href="view_emp.php">View All Employees</a></li> <!-- Add the link here -->
                         </ul>
-                    </div>
-                </a>
+                    </a>    
+                </div>
                 <div class="card">
                     <a href="clients.php" class="card-link">
                         <h2>Bookings</h2>
                         <p>Manage Clients and Bookings</p>
+                        <ul class="options">
+                            <li><a href="booking.php">Booking</a></li>
+                            <li><a href="view_booking.php">View Bookings</a></li>
+                            <li><a href="create_user.php">Create User</a></li>
+                            <li><a href="manage_tours.php">Manage Tours</a></li> <!-- Add the link here -->
+                        </ul>
                     </a>
                 </div>
                 <div class="card">
