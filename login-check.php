@@ -21,23 +21,30 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
         header("Location: login.php?error=Password is required");
 	    exit();
 	} else {
-		// Hashing the password for security
-        $pass = md5($pass); 
 
-		// Secure SQL query using prepared statements to prevent SQL injection
-		$sql = "SELECT * FROM users WHERE user_name=? AND user_password=?";
-		$stmt = mysqli_prepare($conn, $sql);
-		mysqli_stmt_bind_param($stmt, "ss", $uname, $pass);
-		mysqli_stmt_execute($stmt);
-		$result = mysqli_stmt_get_result($stmt);
+		$sqlAdmin = "SELECT * FROM admins WHERE username=? AND password=?";
 
-		if (mysqli_num_rows($result) === 1) {
+		
+		$stmt1 = mysqli_prepare($conn, $sqlAdmin);
+		mysqli_stmt_bind_param($stmt1, "ss", $uname, $pass);
+		mysqli_stmt_execute($stmt1);
+		$result1 = mysqli_stmt_get_result($stmt1);
+		if(mysqli_num_rows($result1) === 1){
+			header("Location: admin_dashboard.php");
+			mysqli_close($conn);
+			exit();
+		}
+
+
+
+		$sqlEmp = "SELECT * FROM employees WHERE username=? AND password=?";
+		$stmt2 = mysqli_prepare($conn, $sqlEmp);
+		mysqli_stmt_bind_param($stmt2, "ss", $uname, $pass);
+		mysqli_stmt_execute($stmt2);
+		$result2 = mysqli_stmt_get_result($stmt2);
+		if (mysqli_num_rows($result2) === 1) {
 			$row = mysqli_fetch_assoc($result);
-            // Store user data in session
-            $_SESSION['user_name'] = $row['user_name'];  // Correctly referencing user_name
-            $_SESSION['name'] = $row['name'];             // Assuming 'name' exists in your table
-            $_SESSION['userid'] = $row['userid'];         // Correctly referencing userid
-			header("Location: user-display.php");
+			header("Location: employee_dashboard.php");
 		    exit();
 		} else {
 			header("Location: login.php?error=Incorrect User name or password");
