@@ -1,13 +1,20 @@
 <?php
+// Database connection variables
+$host = 'localhost'; // Your database host
+$port = 4306;        // Your MySQL port
+$username = 'root';  // Your MySQL username
+$password = '1234';      // Your MySQL password
+$dbname = 'tourop'; // Replace with your database name
 
-$sname= "localhost";
-$unmae= "root";
-$password = "";
+// Create connection
+$conn = new mysqli($host, $username, $password, $dbname, $port);
 
-$db_name = "tourop";
-
-$conn = mysqli_connect($sname, $unmae, $password, $db_name);
-
-if (!$conn) {
-	echo "Connection failed!";
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
+echo "Connected successfully";
+
+// Close the connection when done
+
+?>
