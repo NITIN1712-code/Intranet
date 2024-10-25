@@ -21,6 +21,7 @@
 
         <main>
             <section class="info-cards">
+
                 <!-- HR Management Card -->
                 <div class="card">
                     <h2>Human Resource Management</h2>
@@ -29,7 +30,7 @@
                         <li><a href="add_emp.php">Add Employee</a></li>
                         <li><a href="view_emp.php">View All Employees</a></li>
                         <li><a href="delete_emp.php">Delete Employee</a></li>
-                        <li><a href="employee_reports.php">Generate HR Reports</a></li> <!-- New feature suggestion -->
+                        <li><a href="HR_page.php">Access Human Resources Page</a></li>
                     </ul>
                 </div>
 
