@@ -1,5 +1,4 @@
-<?php 
-session_start(); 
+<?php
 include "db_conn.php";
 
 if (isset($_POST['uname']) && isset($_POST['password'])) {

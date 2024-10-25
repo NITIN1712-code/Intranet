@@ -1,6 +1,3 @@
-<?php
-session_start(); // Make sure to start the session to access session variables testa
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,10 +28,7 @@ session_start(); // Make sure to start the session to access session variables t
                     <ul class="options">
                         <li><a href="add_emp.php">Add Employee</a></li>
                         <li><a href="view_emp.php">View All Employees</a></li>
-                        <!-- Only show the Delete Employee option if the user is an admin -->
-                        <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') : ?>
-                            <li><a href="delete_emp.php">Delete Employee</a></li>
-                        <?php endif; ?>
+                        <li><a href="delete_emp.php">Delete Employee</a></li>
                         <li><a href="employee_reports.php">Generate HR Reports</a></li> <!-- New feature suggestion -->
                     </ul>
                 </div>
