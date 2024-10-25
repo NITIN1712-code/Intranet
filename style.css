@@ -1,308 +1,133 @@
-/* General Styles */
+/* home.css */
+
+/* Basic styling for the body and main container */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f9f9f9; /* Light Gray */
-    color: #333333; /* Dark Gray */
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
     margin: 0;
     padding: 0;
+    color: #333;
 }
 
-/* Header */
-header {
-    background-color: #ffffff; /* White */
-    color: #00a88f; /* Apple Green */
+.home-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-/*logo*/
-.logo {
-    max-width: 150px;
-    height: auto;
-}
-.logo img {
-    max-width: 100px; /* Adjust size as needed */
-    height: auto;
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
 }
 
 header h1 {
-    margin: 0;
-    font-size: 36px;
-}
-
-/* Navigation Bar */
-nav {
-    display: flex;
-    justify-content: center;
-    margin-top: 15px;
+    font-size: 28px;
+    color: #0056b3;
 }
 
 nav ul {
     list-style: none;
     padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin: 0 15px;
+    display: flex;
+    gap: 15px;
 }
 
 nav ul li a {
     text-decoration: none;
-    color: #00a88f; /* Apple Green */
+    color: #0056b3;
     font-weight: bold;
-    transition: color 0.3s ease;
 }
-
 
 nav ul li a:hover {
-    color: #333333; /* Dark Gray */
+    text-decoration: underline;
 }
 
-/* Hero Section */
-.hero-section {
-    background: url('mauritius-hero.jpg') no-repeat center center/cover;
-    height: 400px;
+/* Main content styling */
+main {
+    padding: 20px 0;
+}
+
+/* Welcome section styling */
+.welcome-section {
+    margin-bottom: 30px;
+    background-color: #e3f2fd;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.welcome-section h2 {
+    font-size: 24px;
+    color: #0056b3;
+}
+
+/* Features section styling */
+.features-section {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-.hero-section h2 {
-    font-size: 48px;
-    margin: 0;
+.feature-card {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    flex: 1 1 200px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.hero-section p {
+.feature-card h3 {
     font-size: 20px;
+    color: #0056b3;
 }
 
-/* Call to Action Button */
-.cta-button {
-    background-color: #00a88f; /* Apple Green */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.feature-card p {
+    font-size: 14px;
+    color: #666;
 }
 
-.cta-button:hover {
-    background-color: #333333; /* Dark Gray */
+.feature-card a {
+    text-decoration: none;
+    color: #0056b3;
 }
 
-/* Container */
-.container {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.feature-card a:hover {
+    text-decoration: underline;
 }
 
-/* Tours Section */
-.tours-section {
-    margin: 40px 0;
-    text-align: center;
-}
-
-.tours-section h3 {
-    font-size: 36px;
-    margin-bottom: 30px;
-    color:#00a88f; /* Apple Green */
-}
-
-.tour-cards {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.tour-card {
-    background-color: #FAFAFA; /* Very Light Gray */
-    border: 1px solid #e0e0e0; /* Light Gray */
-    border-radius: 10px;
-    width: 30%;
-    margin: 10px;
-    text-align: left;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.tour-card img {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-}
-
-.tour-card:hover {
-    transform: translateY(-5px);
-}
-
-/* Services Section */
-.services-section {
-    margin: 40px 0;
-    text-align: center;
-}
-
-.services-section h3 {
-    font-size: 36px;
-    margin-bottom: 30px;
-    color: #00a88f; /* Apple Green */
-}
-
-.service-list {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.service {
-    background-color: #FAFAFA; /* Very Light Gray */
-    border: 1px solid #e0e0e0; /* Light Gray */
-    border-radius: 10px;
-    width: 30%;
-    margin: 10px;
-    text-align: left;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Contact Section */
-.contact-section {
-    margin: 40px 0;
-    text-align: center;
-}
-
-.contact-section h3 {
-    font-size: 36px;
-    margin-bottom: 30px;
-    color: #00a88f; /* Apple Green */
-}
-
-.contact-section form {
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: left;
-}
-
-.contact-section input,
-.contact-section textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 2px solid #00a88f; /* Apple Green */
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.contact-section button {
-    background-color: #00a88f; /* Apple Green */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.contact-section button:hover {
-    background-color: #333333; /* Dark Gray */
-}
-
-/* About Section */
-.about-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin: 20px 0;
-}
-
-.about-text {
-    flex: 1;
-    padding-right: 20px;
-}
-
-.about-image {
-    flex: 1;
-    text-align: center;
-}
-
-.about-image img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-}
-
-/* Footer */
+/* Footer styling */
 footer {
-    background-color: #00a88f; /* Apple Green */
-    color: #fff;
     text-align: center;
-    padding: 20px;
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #ccc;
+    font-size: 14px;
+    color: #888;
 }
 
-/* Media Queries */
+/* Responsive Design */
 @media (max-width: 768px) {
-    .tour-card, .service {
-        width: 90%;
-        margin-bottom: 20px;
+    header {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    .about-content {
+    nav ul {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .features-section {
         flex-direction: column;
     }
-
-    .about-text {
-        padding-right: 0;
-    }
-
-    .hero-section {
-        height: 300px;
-    }
-
-    .hero-section h2 {
-        font-size: 36px;
-    }
-}
-.hero-section {
-    background-image: url('https://www.mauritiusbookings.com/modules/imgpool/images/18.jpg'); /* Replace with your image path */
-    background-size: cover; /* Ensures the image covers the entire section */
-    background-position: center; /* Centers the image */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    height: 110vh; /* Makes the section take up the full viewport height */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white; /* Ensures text is visible over the background */
-    padding: 0 20px; /* Adds some padding */
 }
 
-.cta-button {
-    background-color: #00a88f;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.cta-button:hover {
-    background-color: #00a88f;
-}
 
 
 

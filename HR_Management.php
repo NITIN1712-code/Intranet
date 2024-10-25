@@ -13,12 +13,7 @@
             <h1>HR Management</h1>
             <nav>
                 <ul>
-                    <li><a href="dashboard.php">Dashboard</a></li>
-                    <li><a href="employee_directory.php">Employee Directory</a></li>
-                    <li><a href="payroll.php">Payroll</a></li>
-                    <li><a href="leave_requests.php">Leave Requests</a></li>
-                    <li><a href="performance_reviews.php">Performance Reviews</a></li>
-                    <li><a href="reports.php">Reports</a></li>
+                
                     <li><a href="#logout">Logout</a></li>
                 </ul>
             </nav>
@@ -27,7 +22,7 @@
         <main>
             <section class="overview">
                 <h2>HR Overview</h2>
-                <p>Welcome to the HR Management section. Manage employee records, payroll, leave, training, and more.</p>
+                <p>Welcome to the HR Management section. Manage employee records, payroll, leave, and more.</p>
             </section>
 
             <section class="hr-sections">
@@ -49,8 +44,7 @@
                     <ul>
                         <li><a href="payroll.php">View Payroll</a></li>
                         <li><a href="process_payroll.php">Process Payroll</a></li>
-                        <li><a href="add_bonus.php">Add Bonuses</a></li>
-                        <li><a href="deductions.php">Manage Deductions</a></li>
+                       
                     </ul>
                 </div>
 
@@ -60,7 +54,7 @@
                     <p>Manage employee leave requests and approvals.</p>
                     <ul>
                         <li><a href="view_leave_requests.php">View Leave Requests</a></li>
-                        <li><a href="approve_leave.php">Approve/Reject Leave</a></li>
+                      
                         <li><a href="leave_policy.php">Leave Policies</a></li>
                     </ul>
                 </div>

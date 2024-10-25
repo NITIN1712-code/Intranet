@@ -27,9 +27,7 @@
                     <h2>Human Resource Management</h2>
                     <p>Manage HR-related tasks here</p>
                     <ul class="options">
-                        <li><a href="add_emp.php">Add Employee</a></li>
-                        <li><a href="view_emp.php">View All Employees</a></li>
-                        <li><a href="delete_emp.php">Delete Employee</a></li>
+                        
                         <li><a href="HR_Management.php">Access Human Resources Page</a></li>
                     </ul>
                 </div>
