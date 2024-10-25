@@ -1,5 +1,5 @@
 <?php
-session_start(); // Make sure to start the session to access session variables testaada
+session_start(); // Make sure to start the session to access session variables testa
 ?>
 
 <!DOCTYPE html>
