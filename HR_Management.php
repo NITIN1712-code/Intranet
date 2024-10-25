@@ -17,7 +17,6 @@
                     <li><a href="employee_directory.php">Employee Directory</a></li>
                     <li><a href="payroll.php">Payroll</a></li>
                     <li><a href="leave_requests.php">Leave Requests</a></li>
-                    <li><a href="training.php">Training & Development</a></li>
                     <li><a href="performance_reviews.php">Performance Reviews</a></li>
                     <li><a href="reports.php">Reports</a></li>
                     <li><a href="#logout">Logout</a></li>
@@ -37,10 +36,9 @@
                     <h3>Employee Management</h3>
                     <p>Manage employee information and records.</p>
                     <ul>
-                        <li><a href="add_employee.php">Add New Employee</a></li>
-                        <li><a href="view_employees.php">View Employees</a></li>
-                        <li><a href="update_employee.php">Update Employee Details</a></li>
-                        <li><a href="delete_employee.php">Delete Employee</a></li>
+                        <li><a href="add_emp.php">Add New Employee</a></li>
+                        <li><a href="view_emp.php">View Employees</a></li>
+                        <li><a href="delete_emp.php">Delete Employee</a></li>
                     </ul>
                 </div>
 
@@ -49,7 +47,7 @@
                     <h3>Payroll</h3>
                     <p>Manage salaries, bonuses, and deductions.</p>
                     <ul>
-                        <li><a href="view_payroll.php">View Payroll</a></li>
+                        <li><a href="payroll.php">View Payroll</a></li>
                         <li><a href="process_payroll.php">Process Payroll</a></li>
                         <li><a href="add_bonus.php">Add Bonuses</a></li>
                         <li><a href="deductions.php">Manage Deductions</a></li>
@@ -67,16 +65,7 @@
                     </ul>
                 </div>
 
-                <!-- Training & Development -->
-                <div class="hr-card">
-                    <h3>Training & Development</h3>
-                    <p>Manage employee training programs and schedules.</p>
-                    <ul>
-                        <li><a href="view_training.php">View Training Programs</a></li>
-                        <li><a href="schedule_training.php">Schedule New Training</a></li>
-                        <li><a href="training_feedback.php">Training Feedback</a></li>
-                    </ul>
-                </div>
+                
 
                 <!-- Performance Management -->
                 <div class="hr-card">
