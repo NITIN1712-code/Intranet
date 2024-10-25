@@ -1,6 +1,6 @@
 <?php
 $servername = 'localhost';
-$port = 3306;
+$port = 4306;
 $username = 'root';
 $password = '';
 $dbname = 'tourop';
