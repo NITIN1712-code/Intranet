@@ -50,6 +50,15 @@
                         <p>View transactions</p>
                     </a>
                 </div>
+                <div class="card">
+                    <a href="clients.php" class="card-link">
+                        <h2>Human Resources</h2>
+                        <p>Manages Employees and Payroll</p>
+                        <ul class="options">
+                            <li><a href="human_resources.php">Manage Employees</a></li><!-- Add the link here -->
+                        </ul>
+                    </a>
+                </div>
             </section>
         </main>
 
