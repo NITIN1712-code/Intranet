@@ -54,14 +54,6 @@
                             <option value="Annual Leave">Annual Leave</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="approval">Approval Status:</label>
-                        <select id="approval" name="approval">
-                            <option value="Pending" selected>Pending</option>
-                            <option value="Approved">Approved</option>
-                            <option value="Rejected">Rejected</option>
-                        </select>
-                    </div>
                     <button type="submit" class="submit-button">Submit Leave Request</button>
                 </form>
             </section>

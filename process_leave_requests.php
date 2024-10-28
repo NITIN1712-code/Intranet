@@ -5,8 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $employee_id = $_POST['employee_id'];
     $leaveDate = $_POST['leaveDate'];
     $leaveType = $_POST['leaveType'];
-    $approval = $_POST['approval'];
-
+    $approval = true;
     $sql = "INSERT INTO leaves (employee_id, leaveDate, leaveType, approval)
             VALUES ('$employee_id', '$leaveDate', '$leaveType', '$approval')";
 

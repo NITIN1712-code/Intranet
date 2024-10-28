@@ -20,7 +20,7 @@ $result = $conn->query($sql);
         </header>
         
         <main>
-            <a href="HR_Management.php" class="back-button">Back to HR</a>
+            <a href="javascript:history.back()" class="back-button">Back to HR</a>
             <table>
                 <thead>
                     <tr>
@@ -42,10 +42,14 @@ $result = $conn->query($sql);
                             echo "<td>" . htmlspecialchars($row['leaveDate']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['leaveType']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['approval']) . "</td>";
-                            echo "<td>
-                                    <a href='approve_leave.php?leave_id=" . urlencode($row['leave_id']) . "' onclick='return confirm(\"Are you sure you want to approve this leave request?\");'>Approve</a> |
-                                    <a href='reject_leave.php?leave_id=" . urlencode($row['leave_id']) . "' onclick='return confirm(\"Are you sure you want to reject this leave request?\");'>Reject</a>
-                                  </td>";
+                            if($row["approval"] == 1){
+                                echo "<td> Approved </td>";
+                            }else{
+                                echo "<td>
+                                        <a href='approve_leave.php?leave_id=" . urlencode($row['leave_id']) . "' onclick='return confirm(\"Are you sure you want to approve this leave request?\");'>Approve</a> |
+                                        <a href='reject_leave.php?leave_id=" . urlencode($row['leave_id']) . "' onclick='return confirm(\"Are you sure you want to reject this leave request?\");'>Reject</a>
+                                    </td>";
+                            }
                             echo "</tr>";
                         }
                     } else {
