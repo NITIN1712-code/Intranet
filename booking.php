@@ -9,25 +9,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tourguide_id = null;
     $total_price = 0.00;
 
+    // Retrieve number of adults and children
+    $num_adults = $_POST['num_adults'];
+    $num_children = $_POST['num_children'];
+
     if ($tour_choice == 'existing') {
-        // Existing tour logic remains the same
+        // Existing tour logic
         $existing_tour_id = $_POST['existing_tour_id'];
 
-        $sql = "SELECT tourguide_id, SUM(destinations.price) as total_price 
+        $sql = "SELECT tourguide_id, SUM(destinations.price_adult * ?) + SUM(destinations.price_child * ?) as total_price 
                 FROM tours 
                 JOIN tour_destination ON tours.id = tour_destination.tourid
                 JOIN destinations ON tour_destination.destinationid = destinations.id
                 WHERE tours.id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $existing_tour_id);
+        $stmt->bind_param("iii", $num_adults, $num_children, $existing_tour_id);
         $stmt->execute();
         $stmt->bind_result($tourguide_id, $total_price);
         $stmt->fetch();
         $stmt->close();
 
-        $sql = "INSERT INTO bookings (user_id, tourguide_id, total_price) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO bookings (user_id, tourguide_id, total_price, num_adults, num_children) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("iid", $user_id, $tourguide_id, $total_price);
+        $stmt->bind_param("iidii", $user_id, $tourguide_id, $total_price, $num_adults, $num_children);
         $stmt->execute();
         $booking_id = $stmt->insert_id;
         $stmt->close();
@@ -50,14 +54,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Calculate total price for custom destinations
         $destination_ids = implode(',', array_map('intval', $destinations)); // Convert array to comma-separated string
-        $sql = "SELECT SUM(price) FROM destinations WHERE id IN ($destination_ids)";
-        $result = $conn->query($sql);
-        $total_price = $result->fetch_row()[0];
+        $sql = "SELECT SUM(price_adult * ?) + SUM(price_child * ?) FROM destinations WHERE id IN ($destination_ids)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ii", $num_adults, $num_children);
+        $stmt->execute();
+        $total_price = $stmt->get_result()->fetch_row()[0];
+        $stmt->close();
 
         // Insert into bookings
-        $sql = "INSERT INTO bookings (user_id, tourguide_id, total_price) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO bookings (user_id, tourguide_id, total_price, num_adults, num_children) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("iid", $user_id, $tourguide_id, $total_price);
+        $stmt->bind_param("iidii", $user_id, $tourguide_id, $total_price, $num_adults, $num_children);
         $stmt->execute();
         $booking_id = $stmt->insert_id;
         $stmt->close();
@@ -233,8 +240,7 @@ $users = $conn->query("SELECT id, username FROM users");
                 <?php while ($row = $destinations->fetch_assoc()): ?>
                     <input type="checkbox" name="custom_destinations[]" value="<?= $row['id'] ?>"> <?= $row['name'] ?><br>
                 <?php endwhile; ?>
-
-                <label>Select Custom Tour Guide:</label>
+                <label for="custom_tourguide_id">Select Tour Guide:</label>
                 <select name="custom_tourguide_id">
                     <?php while ($row = $tourguides->fetch_assoc()): ?>
                         <option value="<?= $row['tourguide_id'] ?>"><?= $row['tourguide_name'] ?></option>
@@ -242,26 +248,35 @@ $users = $conn->query("SELECT id, username FROM users");
                 </select>
             </div>
 
+            <label for="num_adults">Number of Adults:</label>
+            <input type="number" name="num_adults" min="1" value="1" required>
+
+            <label for="num_children">Number of Children:</label>
+            <input type="number" name="num_children" min="0" value="0" required>
+
             <button type="submit">Book Now</button>
         </form>
     </div>
 
     <script>
-        document.getElementById('existing').addEventListener('click', function() {
-            document.querySelector('.existing-tour-options').style.display = 'block';
-            document.querySelector('.custom-tour-options').style.display = 'none';
+        // Toggle visibility of tour options based on selection
+        const existingOption = document.getElementById('existing');
+        const customOption = document.getElementById('custom');
+        const existingTourOptions = document.querySelector('.existing-tour-options');
+        const customTourOptions = document.querySelector('.custom-tour-options');
+
+        existingOption.addEventListener('change', function() {
+            existingTourOptions.style.display = 'block';
+            customTourOptions.style.display = 'none';
         });
-        document.getElementById('custom').addEventListener('click', function() {
-            document.querySelector('.custom-tour-options').style.display = 'block';
-            document.querySelector('.existing-tour-options').style.display = 'none';
+
+        customOption.addEventListener('change', function() {
+            existingTourOptions.style.display = 'none';
+            customTourOptions.style.display = 'block';
         });
     </script>
 </body>
 </html>
-
-<?php
-$conn->close();
-?>
 
 
 

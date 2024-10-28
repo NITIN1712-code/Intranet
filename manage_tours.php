@@ -85,14 +85,15 @@ if (isset($_POST['update'])) {
 // Change the price of a destination
 if (isset($_POST['change_price'])) {
     $destination_id = $_POST['destination_id'];
-    $new_price = $_POST['new_price'];
+    $new_price_adult = $_POST['new_price_adult'];
+    $new_price_child = $_POST['new_price_child'];
 
     // Prepare and bind
-    $stmt = $conn->prepare("UPDATE destinations SET price = ? WHERE id = ?");
-    $stmt->bind_param("di", $new_price, $destination_id);
+    $stmt = $conn->prepare("UPDATE destinations SET price_adult = ?, price_child = ? WHERE id = ?");
+    $stmt->bind_param("ddi", $new_price_adult, $new_price_child, $destination_id);
     
     if ($stmt->execute() === TRUE) {
-        $message = "Price updated successfully!";
+        $message = "Prices updated successfully!";
     } else {
         $message = "Error: " . $stmt->error;
     }
@@ -265,18 +266,23 @@ $conn->close();
         <input type="submit" name="update" value="Update Tour">
     </form>
 
-    <h2>Change Destination Price</h2>
+    <h2>Change Destination Prices</h2>
     <form method="post">
         <div class="form-group">
             <label for="destination_id">Destination ID:</label>
             <input type="number" name="destination_id" required>
         </div>
         <div class="form-group">
-            <label for="new_price">New Price:</label>
-            <input type="number" step="0.01" name="new_price" required>
+            <label for="new_price_adult">New Adult Price:</label>
+            <input type="number" step="0.01" name="new_price_adult" required>
         </div>
-        <input type="submit" name="change_price" value="Change Price">
+        <div class="form-group">
+            <label for="new_price_child">New Child Price:</label>
+            <input type="number" step="0.01" name="new_price_child" required>
+        </div>
+        <input type="submit" name="change_price" value="Change Prices">
     </form>
 </div>
 </body>
 </html>
+
