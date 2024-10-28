@@ -99,6 +99,7 @@
                 echo "<td><button onclick='editRow(this)'>Edit</button></td>";
                 echo "</tr>";
             }
+            $conn->close();
             ?>
         </tbody>
     </table>
