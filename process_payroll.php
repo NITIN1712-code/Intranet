@@ -48,7 +48,7 @@
                     var dropdown = document.getElementById("Employee_Dropdown");
                     if(data == "ND"){
                         //NO DATA
-                        dropdown.innerHTML = "<option value=''> NO DATA FOUND </option>";
+                        dropdown.innerHTML = "";
                         return;
                     }
                     data = JSON.parse(data);
