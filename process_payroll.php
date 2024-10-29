@@ -15,12 +15,12 @@
 
     <main>
         <section>
-
-            <form>
-                <label for="Employee Name">Input Employee Name</label>
-                <input id="Employee Name" type="text" name="Employee Name">
-            </form>
-            <button onclick="generatePayslip();">Search Employee</button>
+            <label for="Employee Name">Input Employee Name</label>
+            <input id="Employee Name" type="text" name="Employee Name" onchange="generatePayslip();">
+            <select name="Employee_Dropdown" id="Employee_Dropdown">
+                <option value=""></option>
+            </select>
+            <!--<button onclick="generatePayslip();">Fill Form</button>-->
         </section>
         <section class = "PDFElement" style = "display:none">
 
@@ -36,10 +36,23 @@
         function generatePayslip(){
             $.ajax({
                 url: "get_employee_data.php",
+                type: "GET",
                 data: {
                     "employeeName": document.getElementById("Employee Name").value,
                 },
                 success: function(data){
+                    var dropdown = document.getElementById("Employee_Dropdown");
+                    if(data == "ND"){
+                        //NO DATA
+                        dropdown.innerHTML = "<option value=''> NO DATA FOUND </option>";
+                        return;
+                    }
+                    data = JSON.parse(data);
+                    var dropdownstring = ""
+                    for(const empData of data){
+                        dropdownstring += "<option value="+ empData["id"] +">"+ empData["first_name"] + " " + empData["last_name"] +"</option>"; 
+                    }
+                    dropdown.innerHTML = dropdownstring;
                 },
             });
         }
