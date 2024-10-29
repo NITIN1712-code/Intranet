@@ -13,7 +13,7 @@
         $last = substr($val,$pos+1, strlen($val));
     }
 
-    $result = "";
+    $result;
 
     if($last == $first){
         $result = $conn->query("SELECT * FROM employees
@@ -21,7 +21,6 @@
     }else{
         $result = $conn->query("SELECT * FROM employees
                             WHERE first_name LIKE '".$first."%' AND last_name LIKE '".$last."%'");
-
     }
 
     $employeeData = array();

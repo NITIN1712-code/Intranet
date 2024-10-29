@@ -34,6 +34,10 @@
 
     <script>
         function generatePayslip(){
+            if(document.getElementById("Employee Name").value == ""){
+                document.getElementById("Employee_Dropdown").innerHTML = "";
+                return;
+            }
             $.ajax({
                 url: "get_employee_data.php",
                 type: "GET",
