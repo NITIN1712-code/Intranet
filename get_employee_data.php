@@ -6,7 +6,7 @@
 
 
     $result = $conn->query("SELECT * FROM employees
-                            WHERE first_name LIKE '".$val."%'");
+                            WHERE first_name LIKE '".$val."%' OR last_name LIKE '".$val."%'");
 
     $employeeData = array();
 
