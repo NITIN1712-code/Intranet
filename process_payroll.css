@@ -1,0 +1,105 @@
+.holder {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+.pdfElement{
+    width: 784px;
+    height: 1123px;
+}
+.companyDetails{
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+}
+.locationDetails{
+    
+    margin-left: 10%;
+
+    & h4{
+        margin: 0px;
+        width: 100%;
+        text-align: center;
+    }
+}
+.companyDetails img{
+    width: 140px;
+    height: 68px;
+}
+
+.employeeDetails{
+    margin-top: 30px;
+}
+.detailsExtented{
+    display: flex;
+    justify-content: space-between;
+}
+.filler{
+    display: flex;
+
+}
+.filler h4{
+    padding-left: 10px;
+}
+.ex{
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+
+    & h4{
+        margin: 0px;
+    }
+}
+
+th{
+    text-align: left;
+}
+
+#totalSalary{
+    border-top: 2px solid black;
+}
+
+#netSalary{
+    border-top: 2px solid black;
+}
+#netPay{
+    border-top: 2px solid black;
+}
+
+#totalSalaryPaid{
+    border: 1px solid black
+}
+
+
+.paymentInformation{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.otherInfo{
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-around;
+    
+    & h3{
+        margin-right: 20px;
+    }
+}
+
+.sideBox{
+    display: flex;
+    justify-content: space-between;
+}
+
+.imgBox{
+    border: 2px solid black;
+    width: 240px;
+    height: 120px;
+}
+
+@media screen and (max-width: 784px){
+    .holder{
+        display: block;
+    }
+}

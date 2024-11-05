@@ -11,17 +11,22 @@ $salary = $_POST['salary'];
 $email = $_POST['email'];
 $phone_number = $_POST['phone_number'];
 $username = $_POST['username'];
+$address = $_POST["address"];
+$category = $_POST["category"];
+$dept = $_POST["department"];
+$travelCost = $_POST["travel_cost"];
+$baNumber = $_POST["baNumber"];
 $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash the password for security
 
 // Prepare the SQL statement
-$sql = "INSERT INTO employees (first_name, last_name, position, hire_date, salary, email, phone_number, username, password) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO employees (first_name, last_name, position, hire_date, salary, email, phone_number, username, password, address, employee_category, travel_cost, department_id, bank_account_number) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql); // Prepare the statement
 
 if ($stmt) {
     // Bind parameters
-    $stmt->bind_param("ssssdssss", $first_name, $last_name, $position, $hire_date, $salary, $email, $phone_number, $username, $password);
+    $stmt->bind_param("ssssdsssssssis", $first_name, $last_name, $position, $hire_date, $salary, $email, $phone_number, $username, $password, $address, $category, $travelCost,$dept,$baNumber);
     
     // Execute the statement
     if ($stmt->execute()) {

@@ -21,11 +21,15 @@ if (isset($data['id'])) {
     $email = $data['email'];
     $phone_number = $data['phone_number'];
     $username = $data['username'];
+    $dept_id = $data["dept_name"];
+    $address = $data["address"];
+    $employee_category = $data["employee_category"];
+    $ba_num = $data["bank_account_number"];
 
     // Prepare the SQL statement
-    $sql = "UPDATE employees SET first_name=?, last_name=?, position=?, hire_date=?, salary=?, email=?, phone_number=?, username=? WHERE id=?";
+    $sql = "UPDATE employees SET first_name=?, last_name=?, position=?, hire_date=?, salary=?, email=?, phone_number=?, username=?, department_id=?,address=?,employee_category=?,bank_account_number=? WHERE id=?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssdsssi", $first_name, $last_name, $position, $hire_date, $salary, $email, $phone_number, $username, $id);
+    $stmt->bind_param("ssssdsssisssi", $first_name, $last_name, $position, $hire_date, $salary, $email, $phone_number, $username, $dept_id, $address, $employee_category, $ba_num, $id);
 
     // Execute the statement
     if ($stmt->execute()) {
@@ -39,6 +43,15 @@ if (isset($data['id'])) {
         $response['email'] = $email;
         $response['phone_number'] = $phone_number;
         $response['username'] = $username;
+        //$result = $conn->query("SELECT dept_name FROM departments WHERE id = ".$dept_id);
+        //if($result -> num_rows > 0 ){
+            //$row = $result->fetch_assoc();
+            //$dept_id = $row["dept_name"];
+        //}
+        $response["dept_name"] = $dept_id;
+        $response["address"] = $address;
+        $response["employee_category"] = $employee_category;
+        $response["bank_account_number"] = $ba_num;
     } else {
         $response['success'] = false;
         $response['message'] = "Failed to update employee data: " . $stmt->error; // Include error message

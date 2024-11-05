@@ -16,11 +16,13 @@
     $result;
 
     if($last == $first){
-        $result = $conn->query("SELECT * FROM employees
-                            WHERE first_name LIKE '".$first."%' OR last_name LIKE '".$last."%'");
+        $result = $conn->query("SELECT e.*,d.dept_name FROM employees e
+                            INNER JOIN departments d on e.department_id = d.id
+                            WHERE e.first_name LIKE '".$first."%' OR e.last_name LIKE '".$last."%'");
     }else{
-        $result = $conn->query("SELECT * FROM employees
-                            WHERE first_name LIKE '".$first."%' AND last_name LIKE '".$last."%'");
+        $result = $conn->query("SELECT e* FROM employees e
+                            INNER JOIN departments d on e.department_id = d.id
+                            WHERE e.first_name LIKE '".$first."%' AND e.last_name LIKE '".$last."%'");
     }
 
     $employeeData = array();
