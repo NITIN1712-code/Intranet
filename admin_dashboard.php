@@ -14,7 +14,7 @@
             <h1>Admin Dashboard</h1>
             <nav>
                 <ul>
-                    <li><a href="#logout">Logout</a></li>
+                    <li><a href="home.php">Logout</a></li>
                 </ul>
             </nav>
         </header>

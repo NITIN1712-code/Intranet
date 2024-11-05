@@ -25,6 +25,38 @@
             <label for="salary">Salary:</label>
             <input type="number" id="salary" name="salary" required>
 
+            <label for="address">Address:</label>
+            <input id="address" name="address" required>
+            <label for="baNumber">Bank Account Number:</label>
+            <input id="baNumber" name="baNumber" required>
+            
+            <label for="travel_cost">Travel Cost:</label>
+            <input type="number" id="travel_cost" name="travel_cost" required>
+
+            <label for="category">Category:</label>
+            <select name="category" id="category">
+                <option value="Full Time">Full Time</option>
+                <option value="Part Time">Part Time</option>
+            </select>
+
+            <label for="department">Department:</label>
+            <select name="department" id="department">
+                <?php
+                    require("db_conn.php");
+
+                    $sql = "SELECT * FROM departments";
+                    $results = $conn->query($sql);
+
+                    if($results->num_rows > 0){
+                        while($row = $results->fetch_assoc()){
+                            echo "<option value =".$row["id"].">".$row["dept_name"]."</option>";
+                        }
+                    }
+
+                    $conn->close();
+                ?>
+            </select>
+
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
 
