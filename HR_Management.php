@@ -32,7 +32,7 @@
                     <p>Manage employee information and records.</p>
                     <ul>
                         <li><a href="add_emp.php">Add New Employee</a></li>
-                        <li><a href="view_emp.php">View Employees</a></li>
+                        <li><a href="view_emp.php">View And Edit Employees</a></li>
                         <li><a href="delete_emp.php">Delete Employee</a></li>
                     </ul>
                 </div>
@@ -55,7 +55,7 @@
                     <ul>
                         <li><a href="view_leave_requests.php">View Leave Requests</a></li>
                       
-                        <li><a href="leave_policy.php">Leave Policies</a></li>
+                        <li><a href="leave_policy.php">Leave Policies NOTDONE</a></li>
                     </ul>
                 </div>
 
@@ -66,9 +66,9 @@
                     <h3>Performance Reviews</h3>
                     <p>Manage employee performance evaluations.</p>
                     <ul>
+                    <li><a href="add_review.php">Add Performance Review</a></li>
                         <li><a href="view_performance.php">View Performance Reviews</a></li>
-                        <li><a href="add_review.php">Add Performance Review</a></li>
-                        <li><a href="set_goals.php">Set Employee Goals</a></li>
+                    
                     </ul>
                 </div>
 
@@ -78,8 +78,6 @@
                     <p>Generate HR-related reports and analytics.</p>
                     <ul>
                         <li><a href="attendance_report.php">Attendance Report</a></li>
-                        <li><a href="leave_report.php">Leave Report</a></li>
-                        <li><a href="salary_report.php">Salary Report</a></li>
                         <li><a href="performance_report.php">Performance Report</a></li>
                     </ul>
                 </div>
