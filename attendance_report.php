@@ -54,18 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Employee Attendance Report</title>
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 8px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-        th {
-            background-color: #bce0df;
-            font-weight: bold;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
         }
         header {
             background-color: #ffffff;
@@ -74,25 +67,85 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             text-align: center;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        .logo {
-            max-width: 150px;
-            height: auto;
-        }
         header img {
             max-width: 100px;
             height: auto;
         }
+        header h1 {
+            margin: 10px 0;
+            font-size: 36px;
+        }
+        .container {
+            width: 80%;
+            margin: 30px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
         .message {
             color: #2980b9;
             margin-bottom: 20px;
+            font-size: 18px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #00a88f;
+            color: white;
+        }
+        td {
+            background-color: #f9f9f9;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        input[type="text"], select {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+        button {
+            background-color: #00a88f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #3498db;
+        }
+        select {
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
 <header>
-<img src="images/g2.jpg" alt="Explore Mauritius Logo" class="logo" />
+    <img src="images/g2.jpg" alt="Explore Mauritius Logo" class="logo" />
     <h1>Employee Attendance Report</h1>
 </header>
+
+<div class="container">
     <form method="POST" action="">
         <label for="employee_id">Employee ID:</label>
         <input type="text" id="employee_id" name="employee_id" required>
@@ -162,6 +215,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </tbody>
         </table>
     <?php endif; ?>
+</div>
+
 </body>
 </html>
+
 
