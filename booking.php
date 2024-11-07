@@ -6,6 +6,7 @@ require("db_conn.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_id = $_POST['user_id'];
     $tour_choice = $_POST['tour_choice'];
+    $booking_date = $_POST['booking_date'];
     $tourguide_id = null;
     $total_price = 0.00;
 
@@ -29,9 +30,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->fetch();
         $stmt->close();
 
-        $sql = "INSERT INTO bookings (user_id, tourguide_id, total_price, num_adults, num_children) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO bookings (user_id, tourguide_id, total_price, num_adults, num_children, booking_date) VALUES (?, ?, ?, ?, ? , ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("iidii", $user_id, $tourguide_id, $total_price, $num_adults, $num_children);
+        $stmt->bind_param("iidiis", $user_id, $tourguide_id, $total_price, $num_adults, $num_children, $booking_date);
         $stmt->execute();
         $booking_id = $stmt->insert_id;
         $stmt->close();
@@ -49,10 +50,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     } elseif ($tour_choice == 'custom') {
         // Custom tour logic
-        $destinations = $_POST['custom_destinations'];
+        $destinations = $_POST['custom_destinations']; // This is now an array
         $tourguide_id = $_POST['custom_tourguide_id'];
 
-        $destination_ids = implode(',', array_map('intval', $destinations));
+        // Calculate total price for custom destinations
+        $destination_ids = implode(',', array_map('intval', $destinations)); // Convert array to comma-separated string
         $sql = "SELECT SUM(price_adult * ?) + SUM(price_child * ?) FROM destinations WHERE id IN ($destination_ids)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ii", $num_adults, $num_children);
@@ -60,13 +62,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $total_price = $stmt->get_result()->fetch_row()[0];
         $stmt->close();
 
-        $sql = "INSERT INTO bookings (user_id, tourguide_id, total_price, num_adults, num_children) VALUES (?, ?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("iidii", $user_id, $tourguide_id, $total_price, $num_adults, $num_children);
-        $stmt->execute();
-        $booking_id = $stmt->insert_id;
-        $stmt->close();
 
+
+
+
+$sql = "INSERT INTO bookings (user_id, tourguide_id, total_price, num_adults, num_children, booking_date) 
+        VALUES (?, ?, ?, ?, ?, ?)";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("iidiis", $user_id, $tourguide_id, $total_price, $num_adults, $num_children, $booking_date);
+$stmt->execute();
+$booking_id = $stmt->insert_id; 
+
+
+
+        
+        // Insert into booking_destinations for custom destinations
         $sql = "INSERT INTO booking_destinations (booking_id, destination_id) VALUES (?, ?)";
         foreach ($destinations as $destination_id) {
             $stmt = $conn->prepare($sql);
@@ -94,94 +104,52 @@ $users = $conn->query("SELECT id, username FROM users");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Page</title>
     <style>
-        /* General Page Styling */
+        /* Improved CSS */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f6f8;
+            background-color: #f7f7f7;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             padding: 0;
         }
 
-        /* Header */
-        header {
-            background-color: #ffffff;
-            color: #00a88f;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            max-width: 150px;
-            height: auto;
-        }
-
-        header img {
-            max-width: 100px;
-            height: auto;
-        }
-
-        /* Container */
         .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            margin-top: 80px;
-            width: 100%;
-            max-width: 500px;
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
 
-        /* Form Styling */
-        form {
-            width: 100%;
-            padding: 30px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        h1 {
             text-align: center;
+            color: #333;
         }
 
-        form h2 {
-            color: #00a88f;
-            margin-bottom: 20px;
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
         label {
-            display: block;
             font-weight: bold;
-            color: #333;
-            margin: 10px 0 5px;
-            text-align: left;
+            margin-bottom: 5px;
         }
 
-        input[type="text"],
-        input[type="number"],
-        select {
+        input[type="text"], input[type="number"], select {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
+            padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
-            font-size: 16px;
         }
 
         input[type="radio"] {
             margin-right: 10px;
         }
 
-        .existing-tour-options,
-        .custom-tour-options {
+        .custom-tour-options, .existing-tour-options {
             display: none;
             padding: 15px;
             border: 1px solid #e0e0e0;
@@ -200,19 +168,49 @@ $users = $conn->query("SELECT id, username FROM users");
         }
 
         button {
-            width: 100%;
-            padding: 12px;
-            background-color: #00a88f;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            color: white;
-            font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.3s;
         }
 
         button:hover {
-            background-color: #008f76;
+            background-color: #45a049;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+            }
+        }
+        /* Header */
+        header {
+            background-color: #ffffff; /* White */
+            color: #00a88f; /* Apple Green */
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        /* Logo */
+        .logo {
+            max-width: 150px;
+            height: auto;
+        }
+        header img {
+            max-width: 100px; /* Adjust size as needed */
+            height: auto;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+        .message {
+            color: #2980b9; /* Message color */
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -221,65 +219,77 @@ $users = $conn->query("SELECT id, username FROM users");
     <img src="images/g2.jpg" alt="Explore Mauritius Logo" class="logo" />
     <h1>Tour Booking</h1>
 </header>
-
-<div class="container">
-    <form action="booking.php" method="POST">
-        <h2>Book Your Tour</h2>
-
-        <label for="user_id">Select User:</label>
-        <select name="user_id" required>
-            <?php while ($row = $users->fetch_assoc()): ?>
-                <option value="<?= $row['id'] ?>"><?= $row['username'] ?></option>
-            <?php endwhile; ?>
-        </select>
-
-        <label>Select Tour Option:</label>
-        <input type="radio" name="tour_choice" value="existing" id="existing" required> Existing Tour
-        <input type="radio" name="tour_choice" value="custom" id="custom" required> Custom Tour
-
-        <div class="existing-tour-options">
-            <label for="existing_tour_id">Select Existing Tour:</label>
-            <select name="existing_tour_id">
-                <?php while ($row = $tours->fetch_assoc()): ?>
-                    <option value="<?= $row['id'] ?>"><?= $row['tour_name'] ?></option>
+    <div class="container">
+        
+        <form action="booking.php" method="POST">
+            <label for="user_id">Select User:</label>
+            <select name="user_id" required>
+                <?php while ($row = $users->fetch_assoc()): ?>
+                    <option value="<?= $row['id'] ?>"><?= $row['username'] ?></option>
                 <?php endwhile; ?>
             </select>
-        </div>
+            <div class="form-group">
+                        <label for="Booking Date">Booking Date:</label>
+                        <input type="date" id="booking_date" name="booking_date" required>
+                    </div>
+            <label>Select Tour Option:</label>
+            <input type="radio" name="tour_choice" value="existing" id="existing" required> Existing Tour<br>
+            <input type="radio" name="tour_choice" value="custom" id="custom" required> Custom Tour<br>
+            
+            <div class="existing-tour-options">
+                <label for="existing_tour_id">Select Existing Tour:</label>
+                <select name="existing_tour_id">
+                    <?php while ($row = $tours->fetch_assoc()): ?>
+                        <option value="<?= $row['id'] ?>"><?= $row['tour_name'] ?></option>
+                    <?php endwhile; ?>
+                </select>
+            </div>
 
-        <div class="custom-tour-options">
-            <label>Select Custom Destinations:</label>
-            <?php while ($row = $destinations->fetch_assoc()): ?>
-                <input type="checkbox" name="custom_destinations[]" value="<?= $row['id'] ?>"> <?= $row['name'] ?><br>
-            <?php endwhile; ?>
-            <label for="custom_tourguide_id">Select Tour Guide:</label>
-            <select name="custom_tourguide_id">
-                <?php while ($row = $tourguides->fetch_assoc()): ?>
-                    <option value="<?= $row['tourguide_id'] ?>"><?= $row['tourguide_name'] ?></option>
+            <div class="custom-tour-options">
+                <label>Select Custom Destinations:</label>
+                <?php while ($row = $destinations->fetch_assoc()): ?>
+                    <input type="checkbox" name="custom_destinations[]" value="<?= $row['id'] ?>"> <?= $row['name'] ?><br>
                 <?php endwhile; ?>
-            </select>
-        </div>
+                <label for="custom_tourguide_id">Select Tour Guide:</label>
+                <select name="custom_tourguide_id">
+                    <?php while ($row = $tourguides->fetch_assoc()): ?>
+                        <option value="<?= $row['tourguide_id'] ?>"><?= $row['tourguide_name'] ?></option>
+                    <?php endwhile; ?>
+                </select>
+            </div>
 
-        <label for="num_adults">Number of Adults:</label>
-        <input type="number" name="num_adults" min="1" value="1" required>
+            <label for="num_adults">Number of Adults:</label>
+            <input type="number" name="num_adults" min="1" value="1" required>
 
-        <label for="num_children">Number of Children:</label>
-        <input type="number" name="num_children" min="0" value="0" required>
+            <label for="num_children">Number of Children:</label>
+            <input type="number" name="num_children" min="0" value="0" required>
 
-        <button type="submit">Book Now</button>
-    </form>
-</div>
+            <button type="submit">Book Now</button>
+        </form>
+    </div>
 
-<script>
-    document.getElementById('existing').addEventListener('change', function() {
-        document.querySelector('.existing-tour-options').style.display = 'block';
-        document.querySelector('.custom-tour-options').style.display = 'none';
-    });
+    <script>
+        // Toggle visibility of tour options based on selection
+        const existingOption = document.getElementById('existing');
+        const customOption = document.getElementById('custom');
+        const existingTourOptions = document.querySelector('.existing-tour-options');
+        const customTourOptions = document.querySelector('.custom-tour-options');
 
-    document.getElementById('custom').addEventListener('change', function() {
-        document.querySelector('.existing-tour-options').style.display = 'none';
-        document.querySelector('.custom-tour-options').style.display = 'block';
-    });
-</script>
+        existingOption.addEventListener('change', function() {
+            existingTourOptions.style.display = 'block';
+            customTourOptions.style.display = 'none';
+        });
 
+        customOption.addEventListener('change', function() {
+            existingTourOptions.style.display = 'none';
+            customTourOptions.style.display = 'block';
+        });
+    </script>
 </body>
 </html>
+
+
+
+
+
+

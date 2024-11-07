@@ -104,7 +104,7 @@
           $mail->Host       = 'smtp.gmail.com';
           $mail->SMTPAuth   = true;
           $mail->Username   = 'intranet193@gmail.com';      
-          $mail->Password   = 'rmzx whze efci sood';       
+          $mail->Password   = 'qnue lvmi bnwt ebep';       
           $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
           $mail->Port       = 587;
 
