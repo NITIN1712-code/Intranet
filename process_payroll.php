@@ -420,16 +420,47 @@
                 curRates.set(name,Number(document.getElementById(id).value)/100);
             }
         }
+        function generate() {
+            let length = 16;
+            const characters = 'abcdefghijklmnopqrstuvwxyz123456789';
+            let result = '';
+            const charactersLength = characters.length;
+            for(let i = 0; i < length; i++) {
+                result +=  characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
 
         async function payslipPdf(){
             const {jsPDF} = window.jspdf;
 
             const contentCanvas = await html2canvas(document.getElementById("payslip"));
             var img = contentCanvas.toDataURL("image/png");
+            
+            var randomValue = generate();
+
+            var fileName = "payslip"+randomValue+".pdf"
 
             var doc = new jsPDF();
             doc.addImage(img, "png",0 ,0);
-            doc.save("payslip.pdf");
+
+            doc.save(fileName);
+
+            $.ajax({
+                url: "save_mail_payslip.php",
+                type: "POST",
+                data: {
+                    "doc": fileName,
+                    "id" : document.getElementById("Employee_Dropdown").value,
+                    "pay_amount": document.getElementById("totalSalaryPaid").innerHTML,
+                    "date": document.getElementById("IssDate").innerHTML,
+                },
+                success: function(data){
+                    alert(data);
+                },
+            });
+
+            return;
         }
     </script>
 </body>
