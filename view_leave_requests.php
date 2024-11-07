@@ -46,7 +46,7 @@ $result = $conn->query($sql);
                                 echo "<td> Approved </td>";
                             }else{
                                 echo "<td>
-                                        <a href=PhpMailer/index.php?leave_id=" . urlencode($row['leave_id']) . "' onclick='return confirm(\"Are you sure you want to approve this leave request?\");'>Approve</a> |
+                                        <a href=PhpMailer/mail.php?leave_id=" . urlencode($row['leave_id']) . "' onclick='return confirm(\"Are you sure you want to approve this leave request?\");'>Approve</a> |
                                         <a href='index.php?leave_id=" . urlencode($row['leave_id']) . "' onclick='return confirm(\"Are you sure you want to reject this leave request?\");'>Reject</a>
                                     </td>";
                             }
