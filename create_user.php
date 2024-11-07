@@ -16,7 +16,6 @@ if ($conn->connect_error) {
 
 // main page
 require("db_conn.php");
-
 $message = ""; // Initialize message variable
 
 // Create a new user if form submitted
@@ -59,29 +58,104 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create User</title>
-    <link rel="stylesheet" href="style.css">
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .message { color: green; margin-bottom: 20px; }
-        form { margin-bottom: 20px; }
-        label { display: block; margin: 10px 0 5px; }
-        input[type="text"], input[type="email"], input[type="password"] {
-            width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;
+        /* General Page Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            flex-direction: column; /* Stack header and content */
         }
-        input[type="submit"] {
-            background-color: #4CAF50; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px;
-        }
-        input[type="submit"]:hover { background-color: #45a049; }
-        h1, h2 { color: #333; }
 
         /* Header */
         header {
-            background-color: #ffffff; color: #00a88f; padding: 20px; text-align: center;
+            background-color: #ffffff;
+            color: #00a88f;
+            padding: 20px;
+            text-align: center;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
         }
-        .logo { max-width: 150px; height: auto; }
-        header img { max-width: 100px; height: auto; }
-        header h1 { margin: 0; font-size: 36px; }
+
+        .logo {
+            max-width: 150px;
+            height: auto;
+        }
+
+        header img {
+            max-width: 100px;
+            height: auto;
+        }
+
+        /* Main Content */
+        .content {
+            flex: 1; /* Take up the remaining space */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px; /* Set a max-width for the form */
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #00a88f;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: #333;
+            margin: 10px 0 5px;
+            text-align: left;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        button,
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #00a88f;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover,
+        input[type="submit"]:hover {
+            background-color: #008f76;
+        }
     </style>
 </head>
 <body>
@@ -91,25 +165,33 @@ $conn->close();
     <h1>Create User</h1>
 </header>
 
-<?php if ($message): ?>
-    <div class="message"><?php echo htmlspecialchars($message); ?></div>
-<?php endif; ?>
+<!-- Main content area where the form is centered -->
+<div class="content">
+    <div class="container">
+        <h2>Create User</h2>
 
-<form method="post">
-    <label for="username">Username:</label>
-    <input type="text" name="username" required>
+        <?php if ($message): ?>
+            <div class="message"><?php echo htmlspecialchars($message); ?></div>
+        <?php endif; ?>
 
-    <label for="password">Password:</label>
-    <input type="password" name="password" required>
+        <form method="post">
+            <label for="username">Username:</label>
+            <input type="text" name="username" required>
 
-    <label for="email">Email:</label>
-    <input type="email" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
 
-    <label for="full_name">Full Name:</label>
-    <input type="text" name="full_name" required>
+            <label for="email">Email:</label>
+            <input type="email" name="email" required>
 
-    <input type="submit" name="create_user" value="Create User">
-</form>
+            <label for="full_name">Full Name:</label>
+            <input type="text" name="full_name" required>
+
+            <input type="submit" name="create_user" value="Create User">
+        </form>
+    </div>
+</div>
 
 </body>
 </html>
+

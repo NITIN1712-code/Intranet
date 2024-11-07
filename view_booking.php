@@ -41,13 +41,36 @@ $result = $conn->query($query);
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            color: #333;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         h1 {
-            color: #2c3e50;
+            color: #00a88f; /* Greenish Blue */
             text-align: center;
+            margin: 0;
+            padding: 20px 0;
+        }
+        header {
+            background-color: #ffffff; /* White */
+            color: #00a88f; /* Greenish Blue */
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+        .logo {
+            max-width: 150px;
+            height: auto;
+        }
+        header img {
+            max-width: 100px;
+            height: auto;
         }
         .container {
             width: 80%;
@@ -56,11 +79,13 @@ $result = $conn->query($query);
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex-grow: 1;
         }
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
+            table-layout: fixed;
         }
         th, td {
             border: 1px solid #ccc;
@@ -68,32 +93,14 @@ $result = $conn->query($query);
             text-align: left;
         }
         th {
-            background-color: #2980b9;
+            background-color: #00a88f; /* Greenish Blue */
             color: white;
         }
         td {
             background-color: #f9f9f9;
         }
-        /* Header */
-        header {
-            background-color: #ffffff; /* White */
-            color: #00a88f; /* Apple Green */
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        /* Logo */
-        .logo {
-            max-width: 150px;
-            height: auto;
-        }
-        header img {
-            max-width: 100px; /* Adjust size as needed */
-            height: auto;
-        }
-        /* Message styling */
         .message {
-            color: #2980b9; /* Message color */
+            color: #00a88f; /* Greenish Blue */
             margin-bottom: 20px;
         }
     </style>
@@ -101,7 +108,7 @@ $result = $conn->query($query);
 <body>
 
 <header>
-<img src="images/g2.jpg" alt="Explore Mauritius Logo" class="logo" />
+    <img src="images/g2.jpg" alt="Explore Mauritius Logo" class="logo" />
     <h1>Bookings Overview</h1>
 </header>
 
@@ -149,4 +156,10 @@ $result = $conn->query($query);
 // Close the database connection
 $conn->close();
 ?>
+
+</body>
+</html>
+
+
+
 
