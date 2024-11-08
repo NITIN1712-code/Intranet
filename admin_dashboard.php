@@ -50,11 +50,9 @@
                     <p>View and manage financial transactions</p>
                     <ul class="options">
                         <li><a href="view_transactions.php">View Transactions</a></li>
-                        <li><a href="add_transaction.php">Add Transaction</a></li> <!-- Additional option -->
                         <li><a href="financial_report.php">Generate Financial Reports</a></li> <!-- New feature -->
                     </ul>
                 </div>
-
                 <!-- Admin Access -->
                 <div class="card">
                     <h2>Admin Access</h2>
