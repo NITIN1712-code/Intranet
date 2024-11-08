@@ -51,7 +51,7 @@
                     <ul class="options">
                         <li><a href="view_transactions.php">View Transactions</a></li>
                         <li><a href="add_transaction.php">Add Transaction</a></li> <!-- Additional option -->
-                        <li><a href="generate_financial_report.php">Generate Financial Reports</a></li> <!-- New feature -->
+                        <li><a href="financial_report.php">Generate Financial Reports</a></li> <!-- New feature -->
                     </ul>
                 </div>
 
