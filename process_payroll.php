@@ -47,7 +47,7 @@
         <section class = "holder">
             <div class="pdfElement" id="payslip">
                 <div class="companyDetails">
-                    <img src="images/Picture1.png">
+                    <img src="images/payslip_logo.png">
                     <div class="locationDetails">
                         <h4>
                             Connecticut Co Ltd
