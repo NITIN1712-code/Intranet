@@ -48,7 +48,11 @@ try {
 
         sleep(1);
 
-        $mail->AddAttachment("".$file_name);
+        $jsonData = json_decode(file_get_contents("settings.JSON"),true);
+
+
+
+        $mail->AddAttachment($jsonData["download_path"]."\\".$file_name);
 
         if ($mail->send()) {
             echo "Message has been sent";

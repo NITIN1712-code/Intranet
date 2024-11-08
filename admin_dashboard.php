@@ -58,7 +58,7 @@
                     <h2>Admin Access</h2>
                     <p>Admin Options</p>
                     <ul class="options">
-                        <li><a href="#">Settings</a></li>
+                        <li><a href="admin_settings_page.php">Settings</a></li>
                         <li><a href="home.php">Home</a></li> <!-- Additional option -->
                     </ul>
                 </div>
