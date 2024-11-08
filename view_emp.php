@@ -5,52 +5,187 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Employees</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 40px;
+        }
+
+        h1 {
+            color: #00a88f; /* Greenish Blue */
+            text-align: center;
+            margin: 0;
+            font-size: 28px;
+            padding: 10px;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #ffffff; /* White */
+            color: #00a88f; /* Greenish Blue */
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        header .logo-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        header img {
+            max-width: 200px;
+            height: auto;
+        }
+        header h1 {
+    margin-top: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #00a88f; /* Changed color to #00a88f */
+}
+
+
+        /* Container for the Table */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            table-layout: auto;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #00a88f;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        /* Action Button Styling */
+        td button {
+            background-color: #00a88f;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        td button:hover {
+            background-color: #008f76;
+        }
+
+        /* Inputs and Select Styling */
+        td input[type="text"],
+        td input[type="date"],
+        td select {
+            width: 90%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        td select {
+            background-color: #ffffff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 20px;
+            }
+
+            .container {
+                width: 95%;
+            }
+
+            th, td {
+                font-size: 14px;
+            }
+
+            td input[type="text"],
+            td input[type="date"],
+            td select {
+                width: 100%;
+            }
+        }
+    </style>
     <script>
         function editRow(button) {
             const editRow = button.parentNode.parentNode;
             const cells = editRow.getElementsByTagName('td');
 
-            // Convert cells to input fields
             for (let i = 1; i < cells.length - 1; i++) {
                 const cellValue = cells[i].innerText;
-                if(cells[i].getAttribute('data-column') == "hire_date"){
+                if (cells[i].getAttribute('data-column') === "hire_date") {
                     cells[i].innerHTML = `<input type="date" value="${cellValue}" data-column="${cells[i].getAttribute('data-column')}">`;
-                    continue;
-                }
-                if(cells[i].getAttribute('data-column') == "dept_name"){
+                } else if (cells[i].getAttribute('data-column') === "dept_name") {
                     cells[i].innerHTML = `<select id="${cells[i].getAttribute('data-column')}" data-column="${cells[i].getAttribute('data-column')}">
                         <?php
                             require("db_conn.php");
-        
                             $sql = "SELECT * FROM departments";
                             $results = $conn->query($sql);
-        
-                            if($results->num_rows > 0){
-                                while($row = $results->fetch_assoc()){
+                            if ($results->num_rows > 0) {
+                                while ($row = $results->fetch_assoc()) {
                                     echo "<option value =".$row["id"].">".$row["dept_name"]."</option>";
                                 }
                             }
-        
                             $conn->close();
                         ?>
                     </select>`;
-                    var sel = document.getElementById("dept_name");
-                    sel.value = cells[i].getAttribute('data-id');
-                    continue;
-                }
-                if(cells[i].getAttribute('data-column') == "employee_category"){
-                    cells[i].innerHTML = `<select id="${cells[i].getAttribute('data-column')}" value="${cellValue}" data-column="${cells[i].getAttribute('data-column')}">
+                    document.getElementById("dept_name").value = cells[i].getAttribute('data-id');
+                } else if (cells[i].getAttribute('data-column') === "employee_category") {
+                    cells[i].innerHTML = `<select id="${cells[i].getAttribute('data-column')}" data-column="${cells[i].getAttribute('data-column')}">
                         <option value="Full Time">Full Time</option>
                         <option value="Part Time">Part Time</option>
                     </select>`;
-                    var sel = document.getElementById("employee_category");
-                    sel.value = cellValue;
-                    continue;
+                    document.getElementById("employee_category").value = cellValue;
+                } else {
+                    cells[i].innerHTML = `<input type="text" value="${cellValue}" data-column="${cells[i].getAttribute('data-column')}">`;
                 }
-                cells[i].innerHTML = `<input type="text" value="${cellValue}" data-column="${cells[i].getAttribute('data-column')}">`;
             }
 
-            // Change Edit button to Save
             const actionCell = cells[cells.length - 1];
             actionCell.innerHTML = '<button onclick="saveRow(this)">Save</button>';
         }
@@ -59,42 +194,26 @@
             const editRow = button.parentNode.parentNode;
             const cells = editRow.getElementsByTagName('td');
 
-            // Collect data to send to the server
             const data = {};
-            data.id = cells[0].innerText; // Get ID
+            data.id = cells[0].innerText;
             for (let i = 1; i < cells.length - 1; i++) {
-                var input = cells[i].getElementsByTagName('input')[0];
-                if(!input){
-                    input = cells[i].getElementsByTagName('select')[0];
-                }
-                data[input.getAttribute('data-column')] = input.value; // Get input values
+                const input = cells[i].querySelector('input, select');
+                data[input.getAttribute('data-column')] = input.value;
             }
 
-            console.log("Data being sent to the server:", data); // Debugging line
-
-            // Send data to the server using fetch
             fetch('edit_emp_process.php', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data); // Log the response data
                 if (data.success) {
-                    // Update the table cells with the new values
                     for (let i = 1; i < cells.length - 1; i++) {
-                        var cell = cells[i].getElementsByTagName('input')[0];
-                        if(!cell){
-                            cell = cells[i].getElementsByTagName('select')[0];
-                        }
-                        cells[i].innerText = data[cell.getAttribute('data-column')]; // Update cell with new data
+                        const input = cells[i].querySelector('input, select');
+                        cells[i].innerText = data[input.getAttribute('data-column')];
                     }
-                    // Change Save button back to Edit
-                    const actionCell = cells[cells.length - 1];
-                    actionCell.innerHTML = '<button onclick="editRow(this)">Edit</button>';
+                    cells[cells.length - 1].innerHTML = '<button onclick="editRow(this)">Edit</button>';
                 } else {
                     alert('Error: ' + data.message);
                 }
@@ -104,7 +223,15 @@
     </script>
 </head>
 <body>
-    <h1>View Employees</h1>
+
+<header>
+    <div class="logo-container">
+        <img src="images/g2.jpg" alt="Explore Mauritius Logo" class="logo" />
+        <h1>View And Edit Employees</h1>
+    </div>
+</header>
+
+<div class="container">
     <table>
         <thead>
             <tr>
@@ -126,11 +253,9 @@
         </thead>
         <tbody>
             <?php
-            // Fetch employees from the database
-            include 'db_conn.php'; // Ensure you have this file
-            $result = $conn->query("SELECT e.*,d.dept_name FROM employees e
-                                    INNER JOIN departments d
-                                    ON e.department_id = d.id");
+            include 'db_conn.php';
+            $result = $conn->query("SELECT e.*, d.dept_name FROM employees e
+                                    INNER JOIN departments d ON e.department_id = d.id");
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>{$row['id']}</td>";
@@ -142,7 +267,7 @@
                 echo "<td data-column='email'>{$row['email']}</td>";
                 echo "<td data-column='phone_number'>{$row['phone_number']}</td>";
                 echo "<td data-column='username'>{$row['username']}</td>";
-                echo "<td data-column='dept_name' data-id={$row['department_id']}>{$row['dept_name']}</td>";
+                echo "<td data-column='dept_name' data-id='{$row['department_id']}'>{$row['dept_name']}</td>";
                 echo "<td data-column='address'>{$row['address']}</td>";
                 echo "<td data-column='employee_category'>{$row['employee_category']}</td>";
                 echo "<td data-column='bank_account_number'>{$row['bank_account_number']}</td>";
@@ -153,5 +278,7 @@
             ?>
         </tbody>
     </table>
+</div>
+
 </body>
 </html>
