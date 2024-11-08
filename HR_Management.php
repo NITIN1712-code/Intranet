@@ -34,6 +34,7 @@
                         <li><a href="add_emp.php">Add New Employee</a></li>
                         <li><a href="view_emp.php">View And Edit Employees</a></li>
                         <li><a href="delete_emp.php">Delete Employee</a></li>
+                        <li><a href="add_review.php">Add Employee Performance Review</a></li>
                     </ul>
                 </div>
 
@@ -55,30 +56,17 @@
                     <ul>
                         <li><a href="view_leave_requests.php">View Leave Requests</a></li>
                       
-                        <li><a href="leave_policy.php">Leave Policies NOTDONE</a></li>
                     </ul>
                 </div>
 
                 
-
-                <!-- Performance Management -->
-                <div class="hr-card">
-                    <h3>Performance Reviews</h3>
-                    <p>Manage employee performance evaluations.</p>
-                    <ul>
-                    <li><a href="add_review.php">Add Performance Review</a></li>
-                        <li><a href="view_performance.php">View Performance Reviews</a></li>
-                    
-                    </ul>
-                </div>
-
                 <!-- HR Reports -->
                 <div class="hr-card">
                     <h3>Reports</h3>
                     <p>Generate HR-related reports and analytics.</p>
                     <ul>
                         <li><a href="attendance_report.php">Attendance Report</a></li>
-                        <li><a href="performance_report.php">Performance Report</a></li>
+                        <li><a href="view_performance.php">Performance Report</a></li>
                     </ul>
                 </div>
             </section>
