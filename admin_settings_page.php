@@ -14,7 +14,7 @@
         <form action="settings_change.php" method="POST">
             <label for="download_path">Insert Download Path:</label>
             <input type="text" id="download_path" name="download_path">
-            <input type="submit" value="Edit" onclick="onclickfunc()">
+            <input type="submit" value="Edit">
         </form>
         <br>
         <br>

@@ -1,5 +1,8 @@
 <?php
-include "db_conn.php";
+session_start();
+
+
+
 
 if (isset($_POST['uname']) && isset($_POST['password'])) {
 
@@ -20,35 +23,36 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
         header("Location: login.php?error=Password is required");
 	    exit();
 	} else {
-
+		include "db_conn.php";
 		$sqlAdmin = "SELECT * FROM admins WHERE username=? AND password=?";
-
-		
 		$stmt1 = mysqli_prepare($conn, $sqlAdmin);
 		mysqli_stmt_bind_param($stmt1, "ss", $uname, $pass);
 		mysqli_stmt_execute($stmt1);
 		$result1 = mysqli_stmt_get_result($stmt1);
 		if(mysqli_num_rows($result1) === 1){
-			header("Location: admin_dashboard.php");
 			mysqli_close($conn);
+			header("Location: admin_dashboard.php");
 			exit();
 		}
+		mysqli_stmt_close($stmt1);
 
 
-
-		$sqlEmp = "SELECT * FROM employees WHERE username=? AND password=?";
-		$stmt2 = mysqli_prepare($conn, $sqlEmp);
-		mysqli_stmt_bind_param($stmt2, "ss", $uname, $pass);
-		mysqli_stmt_execute($stmt2);
-		$result2 = mysqli_stmt_get_result($stmt2);
-		if (mysqli_num_rows($result2) === 1) {
-			$row = mysqli_fetch_assoc($result);
-			header("Location: employee_dashboard.php");
-		    exit();
-		} else {
-			header("Location: login.php?error=Incorrect User name or password");
-	        exit();
+		$empSql = "SELECT * FROM employees WHERE username=?";
+		$empStmt = mysqli_prepare($conn, $empSql);
+		mysqli_stmt_bind_param($empStmt, "s", $uname);
+		mysqli_stmt_execute($empStmt);
+		$empRes = mysqli_stmt_get_result($empStmt);
+		while($row = mysqli_fetch_assoc($empRes)){
+			if(password_verify($pass, $row["password"])){
+				$_SESSION["id"] = $row["id"];
+				header("Location: home.php");
+				$conn->close();
+				break;
+			}
 		}
+		$conn -> close();
+		exit();
+
 	}
 } else {
 	header("Location: login.php");
