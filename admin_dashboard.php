@@ -195,7 +195,7 @@
                     <ul class="options">
                         <li><a href="view_transactions.php">View Transactions</a></li>
                         <li><a href="add_transaction.php">Add Transaction</a></li> <!-- Additional option -->
-                        <li><a href="generate_financial_report.php">Generate Financial Reports</a></li> <!-- New feature -->
+                        <li><a href="financial_report.php">Generate Financial Reports</a></li> <!-- New feature -->
                     </ul>
                 </div>
 
@@ -204,7 +204,7 @@
                     <h2>Admin Access</h2>
                     <p>Admin Options</p>
                     <ul class="options">
-                        <li><a href="#">Settings</a></li>
+                        <li><a href="admin_settings_page.php">Settings</a></li>
                         <li><a href="home.php">Home</a></li> <!-- Additional option -->
                     </ul>
                 </div>
