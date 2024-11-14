@@ -32,7 +32,37 @@
             <br>
             <input type="submit" value="Edit" name="ml">
         </form>
+        <br>
+        <br>
+        <form action="settings_change.php" method="POST">
+            <label for="company">Company Name:</label>
+            <input type="company" id="company" name="company" required>
+            <input type="submit" value="Edit">
+        </form>
+        <br>
+        <br>
+        <form action="settings_change.php" method="POST">
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required>
+            <br>
+            <br>
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+            <br>
+            <input type="submit" value="Edit">
+        </form>
     </section>
     
+
+    <script>
+        fetch("settings.json")
+        .then((response)=>response.json())
+        .then((json_data)=>{
+            document.getElementById("download_path").value = json_data["download_path"];
+            document.getElementById("company").value = json_data["company"];
+            document.getElementById("location").value = json_data["location"]["location"];
+            document.getElementById("address").value = json_data["location"]["address"];
+        })
+    </script>
 </body>
 </html>
