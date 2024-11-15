@@ -232,7 +232,7 @@ $conn->close();
     displayTable($conn, "SELECT * FROM destinations", "Destinations");
     displayTable($conn, "SELECT * FROM tourguides", "Tour Guides");
     displayTable($conn, "SELECT * FROM tourdrivers", "Tour Drivers");
-    displayTable($conn, "SELECT * FROM tour_destination", "Tour Destination");
+    displayTable($conn, "SELECT * FROM tour_destinations", "Tour Destination");
     ?>
 
     <!-- Display messages -->

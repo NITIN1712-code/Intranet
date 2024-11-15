@@ -3,7 +3,7 @@ $servername = 'localhost';
 $port = 3306;
 $username = 'root';
 $password = '';
-$dbname = 'tourop';
+$dbname = 'tourop_final';
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname, $port);
 

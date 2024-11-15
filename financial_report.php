@@ -338,12 +338,17 @@ foreach ($monthly_data as $month => $data) {
                     <div>
                         <h4>Incomes</h4>
                         <ul>";
-        foreach ($individual_data[$month]['income'] as $income_item) {
-            echo "<li>Date: {$income_item['date']}, Amount: Rs " . number_format($income_item['amount'], 2) . "</li>";
+        if(isset($individual_data[$month]['income'])){
+            foreach ($individual_data[$month]['income'] as $income_item) {
+                echo "<li>Date: {$income_item['date']}, Amount: Rs " . number_format($income_item['amount'], 2) . "</li>";
+            }
         }
+            
         echo "</ul></div><div><h4>Expenses</h4><ul>";
-        foreach ($individual_data[$month]['expenses'] as $expense_item) {
-            echo "<li>Date: {$expense_item['date']}, Amount: Rs " . number_format($expense_item['amount'], 2) . "</li>";
+        if(isset($individual_data[$month]['expenses'])){
+            foreach ($individual_data[$month]['expenses'] as $expense_item) {
+                echo "<li>Date: {$expense_item['date']}, Amount: Rs " . number_format($expense_item['amount'], 2) . "</li>";
+            }
         }
         echo "</ul></div></div></div>";
     }

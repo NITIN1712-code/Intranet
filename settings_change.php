@@ -54,7 +54,7 @@
 
     if(isset($_POST["ml"])){
         $imagePath = "images/";
-        $target_file = $imagePath . "main_logo.png";
+        $target_file = $imagePath . "g2.jpg";
         
         
 

@@ -167,7 +167,6 @@
                     <h3>Payroll</h3>
                     <p>Manage salaries, bonuses, and deductions.</p>
                     <ul>
-                        <li><a href="payroll.php">View Payroll</a></li>
                         <li><a href="process_payroll.php">Process Payroll</a></li>
                     </ul>
                 </div>

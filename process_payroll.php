@@ -263,7 +263,7 @@
             </div>
         </section>
         <section>
-            <button onclick="payslipPdf();">Turn To PDF</button>
+            <button onclick="payslipPdf();">Save And Send</button>
         </section>
     </main>
 
@@ -439,6 +439,10 @@
         }
 
         async function payslipPdf(){
+            if(document.getElementById("IssDate").innerHTML==""){
+                alert("fill the form please");
+                return;
+            }
             const {jsPDF} = window.jspdf;
 
             const contentCanvas = await html2canvas(document.getElementById("payslip"));
@@ -452,6 +456,8 @@
             doc.addImage(img, "png",0 ,0);
 
             doc.save(fileName);
+
+            alert("Sending Mail...");
 
             $.ajax({
                 url: "save_mail_payslip.php",
