@@ -11,10 +11,15 @@ require 'PhpMailer/src/Exception.php';
 $leave_request_id = $_GET['leave_id']; 
 
 
-$query = "UPDATE leaves SET approval = 0 WHERE leave_id = ?";
+
+$leave_request_id = $_GET['leave_id']; 
+
+$query = "UPDATE leaves SET status = 2 WHERE leave_id = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $leave_request_id);
 $stmt->execute();
+
+
 
 
 $query = "SELECT email 
@@ -46,7 +51,6 @@ if ($stmt->num_rows > 0) {
         $mail->Subject = 'Leave Request Rejected';
         $mail->Body    = 'Your leave request has been rejected.';
 
-       
         if ($mail->send()) {
             echo 'Leave request rejected, and email sent to applicant!';
         } else {

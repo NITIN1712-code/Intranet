@@ -109,16 +109,24 @@ $result = $conn->query($sql);
 
         /* Action Button Styling */
         td a {
-            background-color: #00a88f;
-            color: white;
-            padding: 8px 15px;
+            display: inline-block;
+            padding: 8px 12px;
             border-radius: 5px;
             text-decoration: none;
+            color: white;
             transition: background-color 0.3s;
         }
 
+        td a[href*='accept.php'] {
+            background-color: #28a745; /* Green for Approve */
+        }
+
+        td a[href*='reject.php'] {
+            background-color: #dc3545; /* Red for Reject */
+        }
+
         td a:hover {
-            background-color: #008f76;
+            opacity: 0.8;
         }
 
         /* Back Button Styling */
@@ -171,7 +179,7 @@ $result = $conn->query($sql);
                 <th>Employee ID</th>
                 <th>Leave Date</th>
                 <th>Leave Type</th>
-              
+                <th>Status</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -184,17 +192,21 @@ $result = $conn->query($sql);
                     echo "<td>" . htmlspecialchars($row['employee_id']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['leaveDate']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['leaveType']) . "</td>";
-                   
 
-
-
-                    if($row["approval"] == 1){
-                        echo "<td> Email sent </td>";
+                    if ($row["status"] == 1) {
+                        echo "<td>Approved</td>";
+                        echo "<td>-</td>";
+                    } elseif ($row["status"] == 2) {
+                        echo "<td>Rejected</td>";
+                        echo "<td>-</td>"; 
                     } else {
+                        echo "<td>Pending</td>";
                         echo "<td>
-                                <a href='PhpMailer/accept.php?leave_id=" . urlencode($row['leave_id']) . "' onclick='return confirm(\"Are you sure you want to approve this leave request?\");'>Approve</a> |
-                                <a href='Phpmailer/reject.php?leave_id=" . urlencode($row['leave_id']) . "' onclick='return confirm(\"Are you sure you want to reject this leave request?\");'>Reject</a>
-                            </td>";
+                                <a href='PhpMailer/accept.php?leave_id=" . urlencode($row['leave_id']) . "' 
+                                   onclick='return confirm(\"Are you sure you want to approve this leave request?\");'>Approve</a> |
+                                <a href='PhpMailer/reject.php?leave_id=" . urlencode($row['leave_id']) . "' 
+                                   onclick='return confirm(\"Are you sure you want to reject this leave request?\");'>Reject</a>
+                              </td>";
                     }
                     echo "</tr>";
                 }

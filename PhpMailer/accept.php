@@ -9,10 +9,11 @@ require 'db_conn.php';
  require 'PhpMailer/src/SMTP.php';
  require 'PhpMailer/src/Exception.php';
 
+
 $leave_request_id = $_GET['leave_id']; 
 
 
-$query = "UPDATE leaves SET approval = 1 WHERE leave_id = ?";
+$query = "UPDATE leaves SET status = 1 WHERE leave_id = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $leave_request_id);
 $stmt->execute();

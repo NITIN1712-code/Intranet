@@ -1,21 +1,20 @@
 <?php
-    session_start();
-    require("db_conn.php");
-    
-    $logType;
-    $val = false;
-    $id = "null";
+session_start();
+require("db_conn.php");
 
-    if(isset($_SESSION["id"])){
-        $logType = "Logout";
-        $val = true;
-        $id = $_SESSION["id"];
-    }else{
-        $logType = "Login";
-    }
-    
+$logType;
+$val = false;
+$id = "null";
+
+if (isset($_SESSION["id"])) {
+    $logType = "Logout";
+    $val = true;
+    $id = $_SESSION["id"];
+} else {
+    $logType = "Login";
+}
+
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -84,8 +83,6 @@
             font-size: 16px;
             display: inline-block;
         }
-
-        
 
         .card {
             background-color: white;
@@ -207,11 +204,19 @@
             <img src="images/g2.jpg" alt="Explore Mauritius Logo" class="logo" />
             <h1>Connecticut Tours</h1>
             <nav>
-                <ul>
-                    <li><a href="#" id="profile-button" style="display:<?php if($val){echo "block";}else{echo "none";} ?>">Profile</a></li>
-                    <li><a href="login.php" class="login-button"><?php echo $logType ?></a></li>
-                </ul>
-            </nav>
+    <ul>
+        
+        <li><a href="emp_profile.php" id="profile-button" style="display: <?php echo $val ? 'block' : 'none'; ?>">Profile</a></li>
+
+        <?php if ($val): ?>
+            <li><a href="logout.php">Logout</a></li>
+        <?php else: ?>
+            <li><a href="login.php">Login</a></li>
+        <?php endif; ?>
+    </ul>
+</nav>
+
+
         </header>
 
         <main>
@@ -292,8 +297,6 @@
         }
 
         checkEmployee();
-        
-
     </script>
 </body>
 </html>
