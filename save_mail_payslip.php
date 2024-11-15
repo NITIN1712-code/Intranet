@@ -19,7 +19,7 @@ $date = (string)$_POST["date"];
 $mail = new PHPMailer(true);
 
 try {
-    $results = $conn->query("INSERT INTO payrolls(employee_id, paymentAmount, date) VALUES(".$id.",".$pay_amount.",'".$date."')");
+    $results = $conn->query("INSERT INTO payrolls(employee_id, paymentAmount, payment_date) VALUES(".$id.",".$pay_amount.",'".$date."')");
 
 
     
