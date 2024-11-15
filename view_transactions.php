@@ -13,12 +13,16 @@ $sql_incoming .= " ORDER BY b.booking_id DESC";
 
 $sql_outgoing = "SELECT p.payroll_id, p.employee_id, p.paymentAmount, p.payment_date
                  FROM payrolls p";
+$sql_outgoing2 = "SELECT id, paymentAmount, payment_date
+                  FROM outgoing_transaction";
 if ($filterDate) {
     $sql_outgoing .= " WHERE DATE(p.payment_date) = '$filterDate'";
+    $sql_outgoing2 .= " WHERE DATE(payment_date) = '$filterDate'";
 }
 
 $result_incoming = $conn->query($sql_incoming);
 $result_outgoing = $conn->query($sql_outgoing);
+$result_outgoing2 = $conn->query($sql_outgoing2);
 ?>
 
 <!DOCTYPE html>
@@ -27,9 +31,6 @@ $result_outgoing = $conn->query($sql_outgoing);
     <meta charset="UTF-8">
     <title>View Transactions</title>
     <link rel="stylesheet" href="view_transaction.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
     <h1>View Transactions</h1>
@@ -64,7 +65,7 @@ $result_outgoing = $conn->query($sql_outgoing);
             <div class="transaction-box outgoing">
                 <h3>Outgoing Transactions (Payroll)</h3>
                 <?php
-                if ($result_outgoing->num_rows > 0) {
+                if ($result_outgoing->num_rows > 0 || $result_outgoing2->num_rows > 0) {
                     while($row = $result_outgoing->fetch_assoc()) {
                         echo "<div class='transaction-item'>
                                 <span>Payroll ID:</span><span class='value'>" . $row['payroll_id'] . "</span>
@@ -73,47 +74,21 @@ $result_outgoing = $conn->query($sql_outgoing);
                                 <span>Amount:</span><span class='value'>$" . number_format($row['paymentAmount'], 2) . "</span>
                             </div>";
                     }
+                    while($row = $result_outgoing2->fetch_assoc()) {
+                        echo "<div class='transaction-item'>
+                                <span>Transaction ID:</span><span class='value'>" . $row['id'] . "</span>
+                                <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                                <span>Date:</span><span class='value'>" . date("F d, Y", strtotime($row['payment_date'])) . "</span>
+                                <span>Amount:</span><span class='value'>RS" . number_format($row['paymentAmount'], 2) . "</span>
+                            </div>";
+                    }
                 } else {
                     echo "<div>No outgoing transactions found.</div>";
                 }
+                
                 ?>
             </div>
         </div>
     </div>
-
-    <button onclick="transactionPdf()">Turn to pdf</button>
-
-
-    <script>
-
-
-        function generate() {
-            let length = 16;
-            const characters = 'abcdefghijklmnopqrstuvwxyz123456789';
-            let result = '';
-            const charactersLength = characters.length;
-            for(let i = 0; i < length; i++) {
-                result +=  characters.charAt(Math.floor(Math.random() * charactersLength));
-            }
-            return result;
-        }
-
-        async function transactionPdf(){
-            const {jsPDF} = window.jspdf;
-
-            const contentCanvas = await html2canvas(document.getElementById("topdfele"));
-            var img = contentCanvas.toDataURL("image/png");
-            
-            var randomValue = generate();
-
-            var fileName = "financial_report"+randomValue+".pdf"
-
-            var doc = new jsPDF();
-            doc.addImage(img, "png",0 ,0);
-
-            doc.save(fileName);
-            return;
-        }
-    </script>
 </body>
 </html>

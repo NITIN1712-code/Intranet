@@ -35,10 +35,11 @@ function displayTable($conn, $query, $tableTitle) {
 if (isset($_POST['create'])) {
     $tour_name = $_POST['tour_name'];
     $tourguide_id = $_POST['tourguide_id'];
+    $tourdriver_id = $_POST['tourdriver_id'];
 
     // Prepare and bind
-    $stmt = $conn->prepare("INSERT INTO tours (tour_name, tourguide_id) VALUES (?, ?)");
-    $stmt->bind_param("si", $tour_name, $tourguide_id);
+    $stmt = $conn->prepare("INSERT INTO tours (tour_name, tourguide_id, tourdriver_id) VALUES (?, ?, ?)");
+    $stmt->bind_param("sii", $tour_name, $tourguide_id, $tourdriver_id);
 
     if ($stmt->execute() === TRUE) {
         $message = "New tour created successfully!";
@@ -69,10 +70,12 @@ if (isset($_POST['update'])) {
     $tour_id = $_POST['tour_id'];
     $tour_name = $_POST['tour_name'];
     $tourguide_id = $_POST['tourguide_id'];
+    $tourdriver_id = $_POST['tourdriver_id'];
 
     // Prepare and bind
-    $stmt = $conn->prepare("UPDATE tours SET tour_name = ?, tourguide_id = ? WHERE id = ?");
-    $stmt->bind_param("sii", $tour_name, $tourguide_id, $tour_id);
+    $stmt = $conn->prepare("UPDATE tours SET tour_name = ?, tourguide_id = ?, tourdriver_id = ?  WHERE id = ?");
+    $stmt->bind_param("siii", $tour_name, $tourguide_id, $tour_id, $tourdriver_id);
+
 
     if ($stmt->execute() === TRUE) {
         $message = "Tour updated successfully!";
@@ -228,6 +231,7 @@ $conn->close();
     displayTable($conn, "SELECT * FROM tours", "Tours");
     displayTable($conn, "SELECT * FROM destinations", "Destinations");
     displayTable($conn, "SELECT * FROM tourguides", "Tour Guides");
+    displayTable($conn, "SELECT * FROM tourdrivers", "Tour Drivers");
     displayTable($conn, "SELECT * FROM tour_destination", "Tour Destination");
     ?>
 
@@ -245,6 +249,10 @@ $conn->close();
         <div class="form-group">
             <label for="tourguide_id">Tour Guide ID:</label>
             <input type="number" name="tourguide_id" required>
+        </div>
+        <div class="form-group">
+            <label for="tourguide_id">Tour Driver ID:</label>
+            <input type="number" name="tourdriver_id" required>
         </div>
         <input type="submit" name="create" value="Create Tour">
     </form>
@@ -271,6 +279,10 @@ $conn->close();
         <div class="form-group">
             <label for="tourguide_id">New Tour Guide ID:</label>
             <input type="number" name="tourguide_id" required>
+        </div>
+        <div class="form-group">
+            <label for="tourdriver_id">New Tour Driver ID:</label>
+            <input type="number" name="tourdriver_id" required>
         </div>
         <input type="submit" name="update" value="Update Tour">
     </form>

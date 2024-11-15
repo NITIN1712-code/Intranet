@@ -46,9 +46,24 @@ $sql_expenses = "
         payment_date
 ";
 
+$sql_expenses2 = "
+    SELECT
+        DATE_FORMAT(payment_date, '%Y-%m') AS month,
+        paymentAmount AS expense,
+        payment_date
+    FROM
+        outgoing_transaction
+    WHERE
+        payment_date IS NOT NULL
+        AND YEAR(payment_date) = '$selected_year'
+    ORDER BY
+        payment_date
+";
+
 $result_years = $conn->query($sql_years);
 $result_income = $conn->query($sql_income);
 $result_expenses = $conn->query($sql_expenses);
+$result_otherexpences = $conn->query($sql_expenses2);
 
 if (!$result_years || !$result_income || !$result_expenses) {
     die("Error executing query: " . $conn->error);
@@ -79,6 +94,20 @@ while ($row = $result_expenses->fetch_assoc()) {
     ];
     $total_expenses += $expense;
 }
+
+while ($row = $result_otherexpences->fetch_assoc()) {
+    $month = $row['month'];
+    $expense = $row['expense'];
+    $payment_date = $row['payment_date'];
+
+    $monthly_data[$month]['expenses'] = ($monthly_data[$month]['expenses'] ?? 0) + $expense;
+    $individual_data[$month]['expenses'][] = [
+        'date' => $payment_date,
+        'amount' => $expense
+    ];
+    $total_expenses += $expense;
+}
+
 
 $months = [];
 $profits = [];
@@ -176,10 +205,12 @@ foreach ($monthly_data as $month => $data) {
 
     .details {
         display: none;
-        margin-top: 20px;
+        margin-top: 5px;
+        margin-bottom: 10px;
         background-color: #f9f9f9;
         border: 1px solid #ddd;
         padding: 15px;
+        padding-top: 0px;
         border-radius: 8px;
     }
 
@@ -210,6 +241,11 @@ foreach ($monthly_data as $month => $data) {
 
     .details-container ul li:last-child {
         border-bottom: none;
+    }
+
+    .details h3{
+        display: flex;
+        justify-content: space-between;
     }
 
     .close-btn {
@@ -293,7 +329,7 @@ foreach ($monthly_data as $month => $data) {
                 <td>Rs $income</td>
                 <td>Rs $expenses</td>
                 <td>Rs $net_profit</td>
-                <td><button onclick=\"toggleDetails('$month')\">View Details</button></td>
+                <td><button id=$month onclick=\"toggleDetails('$month')\">View Details</button></td>
               </tr>";
 
         echo "<div id='details-$month' class='details'>
@@ -330,6 +366,10 @@ foreach ($monthly_data as $month => $data) {
     function toggleDetails(month) {
         const details = document.getElementById(`details-${month}`);
         details.style.display = (details.style.display === 'none' || details.style.display === '') ? 'block' : 'none';
+        if(!(details.style.display === 'none' || details.style.display === '')){
+            document.documentElement.scrollTop = 0;
+        }
+        document.getElementById(month).innerHTML = (details.style.display === 'none' || details.style.display === '') ? 'View Details' : 'Close';;
     }
 
     var options = {

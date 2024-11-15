@@ -7,23 +7,26 @@ if ($conn->connect_error) {
     die("Database connection failed: " . $conn->connect_error);
 }
 
-// SQL query with LEFT JOIN to retrieve booking information
+// SQL query with LEFT JOIN to retrieve booking information, including date and driver name
 $query = "
     SELECT 
         b.booking_id, 
         b.total_price, 
         b.num_adults, 
         b.num_children, 
+        b.booking_date, 
         u.username AS user_name, 
         u.full_name AS user_full_name, 
         t.tourguide_name AS tourguide,
+        dvr.tourdriver_name AS driver_name,
         GROUP_CONCAT(d.name SEPARATOR ', ') AS destinations
     FROM bookings b
     LEFT JOIN users u ON b.user_id = u.id
     LEFT JOIN tourguides t ON b.tourguide_id = t.tourguide_id
+    LEFT JOIN tourdrivers dvr ON b.tourdriver_id = dvr.tourdriver_id
     LEFT JOIN booking_destinations bd ON b.booking_id = bd.booking_id
     LEFT JOIN destinations d ON bd.destination_id = d.id
-    GROUP BY b.booking_id, u.username, u.full_name, t.tourguide_name
+    GROUP BY b.booking_id, u.username, u.full_name, t.tourguide_name, dvr.tourdriver_name
     ORDER BY b.booking_id ASC
 ";
 
@@ -38,6 +41,7 @@ $result = $conn->query($query);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Bookings</title>
     <style>
+        /* General layout */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -47,12 +51,12 @@ $result = $conn->query($query);
             flex-direction: column;
             min-height: 100vh;
         }
-        h1 {
+        h1, h2 {
             color: #00a88f; /* Greenish Blue */
             text-align: center;
-            margin: 0;
-            padding: 20px 0;
         }
+        
+        /* Header */
         header {
             background-color: #ffffff; /* White */
             color: #00a88f; /* Greenish Blue */
@@ -72,20 +76,22 @@ $result = $conn->query($query);
             max-width: 100px;
             height: auto;
         }
+
+        /* Container */
         .container {
             width: 80%;
-            margin: 0 auto;
+            margin: 20px auto;
             background: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            flex-grow: 1;
         }
+
+        /* Table styling */
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
-            table-layout: fixed;
         }
         th, td {
             border: 1px solid #ccc;
@@ -100,8 +106,9 @@ $result = $conn->query($query);
             background-color: #f9f9f9;
         }
         .message {
-            color: #00a88f; /* Greenish Blue */
+            color: #00a88f;
             margin-bottom: 20px;
+            text-align: center;
         }
     </style>
 </head>
@@ -113,6 +120,10 @@ $result = $conn->query($query);
 </header>
 
 <div class="container">
+    <?php if (isset($message) && $message != ""): ?>
+        <div class="message"><?php echo htmlspecialchars($message); ?></div>
+    <?php endif; ?>
+
     <table>
         <thead>
             <tr>
@@ -120,6 +131,8 @@ $result = $conn->query($query);
                 <th>User Name</th>
                 <th>User Full Name</th>
                 <th>Tour Guide</th>
+                <th>Driver</th>
+                <th>Booking Date</th>
                 <th>Destinations</th>
                 <th>Total Price</th>
                 <th>Adults</th>
@@ -129,23 +142,25 @@ $result = $conn->query($query);
         <tbody>
             <?php
             // Check if there are any results
-            if ($result->num_rows > 0) {
+            if ($result && $result->num_rows > 0) {
                 // Output data for each booking
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
-                    echo "<td>" . $row['booking_id'] . "</td>";
-                    echo "<td>" . $row['user_name'] . "</td>";
-                    echo "<td>" . $row['user_full_name'] . "</td>";
-                    echo "<td>" . $row['tourguide'] . "</td>";
-                    echo "<td>" . $row['destinations'] . "</td>";
-                    echo "<td>" . $row['total_price'] . "</td>";
-                    echo "<td>" . $row['num_adults'] . "</td>";
-                    echo "<td>" . $row['num_children'] . "</td>";
+                    echo "<td>" . htmlspecialchars($row['booking_id']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['user_name']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['user_full_name']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['tourguide']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['driver_name']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['booking_date']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['destinations']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['total_price']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['num_adults']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['num_children']) . "</td>";
                     echo "</tr>";
                 }
             } else {
                 // If no bookings are found, display a message
-                echo "<tr><td colspan='8'>No bookings found.</td></tr>";
+                echo "<tr><td colspan='10'>No bookings found.</td></tr>";
             }
             ?>
         </tbody>
@@ -159,7 +174,3 @@ $conn->close();
 
 </body>
 </html>
-
-
-
-

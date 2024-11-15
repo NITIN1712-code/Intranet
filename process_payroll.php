@@ -36,7 +36,7 @@
     </header>
 
     <main>
-        <section>
+        <section class="search">
             <label for="Employee Name">Input Employee Name</label>
             <input id="Employee Name" type="text" name="Employee Name" onchange="generatePayslip();">
             <select name="Employee_Dropdown" id="Employee_Dropdown">
@@ -49,14 +49,11 @@
                 <div class="companyDetails">
                     <img src="images/payslip_logo.png">
                     <div class="locationDetails">
-                        <h4>
-                            Connecticut Co Ltd
+                        <h4 id="comp_name">
                         </h4>
-                        <h4>
-                            Suite 138, 2nd Floor, Harbour Front Building,
+                        <h4 id="loc">
                         </h4>
-                        <h4>
-                            President John Kennedy Street, Port Louis, 11302
+                        <h4 id="comp_address">
                         </h4>
                     </div>
                 </div>
@@ -276,6 +273,16 @@
 
 
     <script>
+
+        fetch("settings.json")
+        .then((response)=>response.json())
+        .then((json_data)=>{
+            document.getElementById("comp_name").innerHTML= json_data["company"];
+            document.getElementById("loc").innerHTML = json_data["location"]["location"];
+            document.getElementById("comp_address").innerHTML = json_data["location"]["address"];
+        })
+
+
         function generatePayslip(){
             if(document.getElementById("Employee Name").value == ""){
                 document.getElementById("Employee_Dropdown").innerHTML = "";
