@@ -181,9 +181,10 @@
                     <h2>Bookings</h2>
                     <p>Manage Clients and Bookings</p>
                     <ul class="options">
+                        <li><a href="create_user.php">Create User</a></li>
+                        <li><a href="edit_user.php">View, Edit And Delete Users</a></li>
                         <li><a href="booking.php">Create New Booking</a></li>
                         <li><a href="view_booking.php">View All Bookings</a></li>
-                        <li><a href="create_user.php">Create User</a></li>
                         <li><a href="manage_tours.php">Manage Tours</a></li>
                     </ul>
                 </div>

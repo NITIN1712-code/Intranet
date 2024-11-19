@@ -212,6 +212,9 @@ $conn->close();
             color: #00a88f; /* Message color */
             margin-bottom: 20px;
         }
+
+        .back-button { margin-top: 10px; background-color: #ddd; color: #333; }
+        .back-button:hover { background-color: #bbb; }
     </style>
 </head>
 <body>
@@ -232,13 +235,9 @@ $conn->close();
     displayTable($conn, "SELECT * FROM destinations", "Destinations");
     displayTable($conn, "SELECT * FROM tourguides", "Tour Guides");
     displayTable($conn, "SELECT * FROM tourdrivers", "Tour Drivers");
-    displayTable($conn, "SELECT * FROM tour_destinations", "Tour Destination");
+    displayTable($conn, "SELECT * FROM tour_destination", "Tour Destination");
     ?>
 
-    <!-- Display messages -->
-    <?php if ($message): ?>
-        <div class="message"><?php echo htmlspecialchars($message); ?></div>
-    <?php endif; ?>
 
     <h2>Create a New Tour</h2>
     <form method="post">
@@ -303,6 +302,7 @@ $conn->close();
         </div>
         <input type="submit" name="change_price" value="Update Prices">
     </form>
+    <button class="back-button" onclick="history.back(); return false;">Back To Booking</button>
 </div>
 
 </body>

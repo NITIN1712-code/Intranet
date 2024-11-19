@@ -13,7 +13,9 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+?>
 
+<?php
 // main page
 require("db_conn.php");
 $message = ""; // Initialize message variable
@@ -21,9 +23,10 @@ $message = ""; // Initialize message variable
 // Create a new user if form submitted
 if (isset($_POST['create_user'])) {
     $username = $_POST['username'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $email = $_POST['email'];
     $full_name = $_POST['full_name'];
+    $phone_num = $_POST['phone_num'];
+    $address = $_POST['address'];
 
     // Check if username or email already exists
     $check_user = $conn->prepare("SELECT * FROM users WHERE username = ? OR email = ?");
@@ -35,8 +38,8 @@ if (isset($_POST['create_user'])) {
         $message = "Username or email already exists!";
     } else {
         // Insert new user into users table
-        $stmt = $conn->prepare("INSERT INTO users (username, password, email, full_name) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $username, $password, $email, $full_name);
+        $stmt = $conn->prepare("INSERT INTO users (username, full_name, email, phone_num, address) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $username, $full_name, $email, $phone_num, $address);
 
         if ($stmt->execute()) {
             $message = "User created successfully!";
@@ -123,7 +126,8 @@ $conn->close();
 
         input[type="text"],
         input[type="email"],
-        input[type="password"] {
+        input[type="tel"],
+        textarea {
             width: 100%;
             padding: 12px;
             margin-bottom: 15px;
@@ -156,6 +160,23 @@ $conn->close();
         input[type="submit"]:hover {
             background-color: #008f76;
         }
+
+        .back-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #cccccc;
+            border: none;
+            border-radius: 5px;
+            color: black;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #b3b3b3;
+        }
     </style>
 </head>
 <body>
@@ -168,7 +189,7 @@ $conn->close();
 <!-- Main content area where the form is centered -->
 <div class="content">
     <div class="container">
-        <h2>Create User</h2>
+        
 
         <?php if ($message): ?>
             <div class="message"><?php echo htmlspecialchars($message); ?></div>
@@ -178,20 +199,23 @@ $conn->close();
             <label for="username">Username:</label>
             <input type="text" name="username" required>
 
-            <label for="password">Password:</label>
-            <input type="password" name="password" required>
+            <label for="full_name">Full Name:</label>
+            <input type="text" name="full_name" required>
 
             <label for="email">Email:</label>
             <input type="email" name="email" required>
 
-            <label for="full_name">Full Name:</label>
-            <input type="text" name="full_name" required>
+            <label for="phone_num">Phone Number:</label>
+            <input type="tel" name="phone_num" required>
+
+            <label for="address">Address:</label>
+            <textarea name="address" rows="3" required></textarea>
 
             <input type="submit" name="create_user" value="Create User">
+            <button class="back-button" onclick="history.back(); return false;">Back To Booking</button>
         </form>
     </div>
 </div>
 
 </body>
 </html>
-

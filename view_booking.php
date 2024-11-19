@@ -110,6 +110,9 @@ $result = $conn->query($query);
             margin-bottom: 20px;
             text-align: center;
         }
+
+        .back-button { margin-top: 10px; background-color: #ddd; color: #333; }
+        .back-button:hover { background-color: #bbb; }
     </style>
 </head>
 <body>
@@ -165,6 +168,7 @@ $result = $conn->query($query);
             ?>
         </tbody>
     </table>
+    <button class="back-button" onclick="history.back(); return false;">Back To Booking</button>
 </div>
 
 <?php
