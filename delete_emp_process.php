@@ -1,27 +1,27 @@
 <?php
-// Include the database connection file
-include 'db_conn.php';
+require 'db_conn.php';
 
-// Check if the employee ID is set
-if (isset($_POST['employee_id']) && !empty($_POST['employee_id'])) {
-    $employee_id = $_POST['employee_id'];
+header('Content-Type: application/json');
 
-    // Prepare and execute the delete query
-    $stmt = $conn->prepare("DELETE FROM employees WHERE id = ?");
-    $stmt->bind_param("i", $employee_id);
+$data = json_decode(file_get_contents('php://input'), true);
+
+if (isset($data['id'])) {
+    $id = intval($data['id']);
+
+    $sql = "DELETE FROM employees WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $id);
 
     if ($stmt->execute()) {
-        echo "Employee deleted successfully.";
+        echo json_encode(['success' => true]);
     } else {
-        echo "Error deleting employee: " . $conn->error;
+        echo json_encode(['success' => false, 'message' => 'Failed to delete employee.']);
     }
 
-    // Close the prepared statement
     $stmt->close();
 } else {
-    echo "No employee selected.";
+    echo json_encode(['success' => false, 'message' => 'Invalid request.']);
 }
 
-// Close the database connection
 $conn->close();
 ?>

@@ -7,149 +7,138 @@
     <link rel="stylesheet" href="style.css">
     <style>
         /* General Page Styling */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f8;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 40px;
-        }
+/* General Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full viewport height */
+}
 
-        h1 {
-            color: #00a88f; /* Greenish Blue */
-            text-align: center;
-            margin: 0;
-            font-size: 28px;
-            padding: 10px;
-        }
+h1 {
+    color: #00a88f; /* Greenish Blue */
+    text-align: center;
+    margin: 0;
+    font-size: 28px;
+    padding: 10px;
+}
 
-        /* Header Styling */
-        header {
-            background-color: #ffffff; /* White */
-            color: #00a88f; /* Greenish Blue */
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
+/* Header Styling */
+header {
+    position: absolute; /* Keep header at the top */
+    top: 0;
+    width: 100%;
+    background-color: #ffffff; /* White */
+    color: #00a88f; /* Greenish Blue */
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
-        header .logo-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 15px;
-        }
+header img {
+    max-width: 200px;
+    height: auto;
+}
 
-        header img {
-            max-width: 200px;
-            height: auto;
-        }
-        header h1 {
+header h1 {
     margin-top: 10px;
     font-size: 28px;
     font-weight: bold;
-    color: #00a88f; /* Changed color to #00a88f */
+    color: #00a88f;
 }
 
+/* Table Styling */
+table {
+    width: 90%;
+    max-width: 1200px; /* Optional maximum width */
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow-x: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-        /* Container for the Table */
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin-top: 40px;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            overflow-x: auto;
-        }
+th, td {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: left;
+    font-size: 16px;
+}
 
-        /* Table Styling */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-            table-layout: auto;
-        }
+th {
+    background-color: #00a88f;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
 
-        th, td {
-            border: 1px solid #ddd;
-            padding: 15px;
-            text-align: left;
-            font-size: 16px;
-        }
+td {
+    background-color: #f9f9f9;
+}
 
-        th {
-            background-color: #00a88f;
-            color: white;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
+/* Action Button Styling */
+td button {
+    background-color: #00a88f;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
 
-        td {
-            background-color: #f9f9f9;
-        }
+td button:hover {
+    background-color: #008f76;
+}
 
-        /* Action Button Styling */
-        td button {
-            background-color: #00a88f;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
+td button:nth-child(2) {
+    background-color: #e74c3c; /* Red for delete button */
+}
 
-        td button:hover {
-            background-color: #008f76;
-        }
+td button:nth-child(2):hover {
+    background-color: #c0392b;
+}
 
-        /* Inputs and Select Styling */
-        td input[type="text"],
-        td input[type="date"],
-        td select {
-            width: 90%;
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
-        }
+/* Inputs and Select Styling */
+td input[type="text"],
+td input[type="date"],
+td select {
+    width: 90%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
 
-        td select {
-            background-color: #ffffff;
-        }
+td select {
+    background-color: #ffffff;
+}
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            body {
-                padding-top: 20px;
-            }
+/* Responsive Design */
+@media (max-width: 768px) {
+    table {
+        width: 100%;
+    }
 
-            .container {
-                width: 95%;
-            }
+    th, td {
+        font-size: 14px;
+    }
 
-            th, td {
-                font-size: 14px;
-            }
+    td input[type="text"],
+    td input[type="date"],
+    td select {
+        width: 100%;
+    }
+}
 
-            td input[type="text"],
-            td input[type="date"],
-            td select {
-                width: 100%;
-            }
-        }
     </style>
     <script>
         function editRow(button) {
@@ -220,6 +209,32 @@
             })
             .catch(error => console.error('Error:', error));
         }
+
+            // Delete Row Function
+    function deleteRow(button) {
+        if (!confirm("Are you sure you want to delete this employee?")) {
+            return; // Exit if the user cancels the action
+        }
+
+        const row = button.parentNode.parentNode; // Get the row
+        const employeeId = row.cells[0].innerText; // Get the employee ID (first column)
+
+        fetch('delete_emp_process.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: employeeId }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                row.remove(); // Remove the row from the table
+                alert("Employee deleted successfully.");
+            } else {
+                alert('Error: ' + data.message);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
     </script>
 </head>
 <body>
@@ -227,7 +242,7 @@
 <header>
     <div class="logo-container">
         <img src="images/g2.jpg" alt="Explore Mauritius Logo" class="logo" />
-        <h1>View And Edit Employees</h1>
+        <h1>View, Edit And Delete Employees</h1>
     </div>
 </header>
 
@@ -271,9 +286,13 @@
                 echo "<td data-column='address'>{$row['address']}</td>";
                 echo "<td data-column='employee_category'>{$row['employee_category']}</td>";
                 echo "<td data-column='bank_account_number'>{$row['bank_account_number']}</td>";
-                echo "<td><button onclick='editRow(this)'>Edit</button></td>";
+                echo "<td>
+                        <button onclick='editRow(this)'>Edit</button>
+                        <button onclick='deleteRow(this)' style='background-color: #e74c3c;'>Delete</button>
+                      </td>";
                 echo "</tr>";
             }
+            
             $conn->close();
             ?>
         </tbody>
