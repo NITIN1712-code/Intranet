@@ -1,4 +1,3 @@
-
 <?php
     session_start();
 
@@ -119,6 +118,42 @@
         button:hover {
             background-color: #008f76;
         }
+
+
+        button,
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #00a88f;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover,
+        input[type="submit"]:hover {
+            background-color: #008f76;
+        }
+
+        .back-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #cccccc;
+            border: none;
+            border-radius: 5px;
+            color: black;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #b3b3b3;
+        }
     </style>
 </head>
 <body>
@@ -143,11 +178,10 @@
 
         <!-- Login Button -->
         <button type="submit">Login</button>
+
+        <button class="back-button" onclick="history.back(); return false;">Back</button>
     </form>
 </div>
 
 </body>
 </html>
-
-
-

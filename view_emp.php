@@ -139,6 +139,10 @@ td select {
     }
 }
 
+
+.back-button { margin-top: 10px; background-color: #ddd; color: #333; }
+        .back-button:hover { background-color: #bbb; }
+
     </style>
     <script>
         function editRow(button) {
@@ -297,6 +301,7 @@ td select {
             ?>
         </tbody>
     </table>
+    <button class="back-button" onclick="history.back(); return false;">Back To Booking</button>
 </div>
 
 </body>

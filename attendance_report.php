@@ -137,6 +137,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         select {
             font-size: 14px;
         }
+
+
+        button,
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #00a88f;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover,
+        input[type="submit"]:hover {
+            background-color: #008f76;
+        }
+
+        .back-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #cccccc;
+            border: none;
+            border-radius: 5px;
+            color: black;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #b3b3b3;
+        }
     </style>
 </head>
 <body>
@@ -215,6 +251,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </tbody>
         </table>
     <?php endif; ?>
+    <button class="back-button" onclick="history.back(); return false;">Back</button>
 </div>
 
 </body>
