@@ -45,7 +45,7 @@
         <section class = "holder">
             <div class="pdfElement" id="payslip">
                 <div class="companyDetails">
-                    <img src="images/payslip_logo.png">
+                    <img src="images/g2.jpg">
                     <div class="locationDetails">
                         <h4 id="comp_name">
                         </h4>
@@ -124,12 +124,16 @@
                             </tr>
                             <tr>
                                 <td>Travelling</td>
-                                <td id = "travelRate"></td>
-                                <td id = "travelDays"></td>
+                                <td id = "travelRate"><?php echo $data["travel_cost"]; ?></td>
+                                <td id = "travelDays"><?php 
+                                    $ratio = $data["csg"] + $data["nsf"];
+                                    $totalTravelCost = ($data["paymentAmount"] - $data["salary_base"] + ($data["salary_base"] * $ratio))/(1 - $ratio);
+                                    echo ($totalTravelCost / $data["travel_cost"]);
+                                ?></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td id = "travelCost"><?php //echo $data["travel_cost"]; ?></td>
+                                <td id = "travelCost"><?php echo $totalTravelCost ?></td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -138,7 +142,10 @@
                                 <td></td>
                                 <td></td>
                                 <td>Gross Pay(A)</td>
-                                <td id = "totalSalary"><?php echo $data["salary_base"]; ?></td>
+                                <td id = "totalSalary"><?php
+                                    $totalSal = $data["salary_base"] + $totalTravelCost;
+                                    echo $totalSal; 
+                                 ?></td>
                             </tr>
                             <tr><td><br></td></tr>
                             <tr><td><br></td></tr>
@@ -153,21 +160,21 @@
                             </tr>
                             <tr>
                                 <td>NSF</td>
-                                <td><input value=<?php echo $data["nsf"]; ?>>%</input></td>
+                                <td><input value=<?php echo $data["nsf"] * 100; ?>>%</input></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td id = "NSFCost"><?php echo $data["salary_base"] * $data["nsf"]; ?></td>
+                                <td id = "NSFCost"><?php echo $totalSal * $data["nsf"]; ?></td>
                             </tr>
                             <tr>
                                 <td>CSG</td>
-                                <td><input value= <?php echo $data["csg"]; ?>>%</input></td>
+                                <td><input value= <?php echo $data["csg"] * 100; ?>>%</input></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td id = "CSGCost"><?php echo $data["salary_base"] * $data["csg"]; ?></td>
+                                <td id = "CSGCost"><?php echo $totalSal * $data["csg"]; ?></td>
                             </tr>
                             <tr>
                                 <td>Adv on Salary Deduction</td>
@@ -185,7 +192,7 @@
                                 <td></td>
                                 <td></td>
                                 <td>(B)</td>
-                                <td id="totalSD"><?php echo $data["salary_base"] - $data["paymentAmount"];  ?></td>
+                                <td id="totalSD"><?php echo $totalSal - $data["paymentAmount"];  ?></td>
                             </tr>
                             <tr><td><br></td></tr>
                             <tr>
