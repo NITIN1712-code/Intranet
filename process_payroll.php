@@ -459,6 +459,14 @@
 
             alert("Sending Mail...");
 
+            var reqEmp;
+            for(const empData of empdatas){
+                if(empData["id"] == document.getElementById("Employee_Dropdown").value){
+                    reqEmp = empData;
+                    break;
+                }
+            }
+
             $.ajax({
                 url: "save_mail_payslip.php",
                 type: "POST",
@@ -467,6 +475,18 @@
                     "id" : document.getElementById("Employee_Dropdown").value,
                     "pay_amount": document.getElementById("totalSalaryPaid").innerHTML,
                     "date": document.getElementById("IssDate").innerHTML,
+                    "NSF": curRates.get("NSF"),
+                    "CSG": curRates.get("CSG"),
+                    "prgf": baseRates.get("PRFG"),
+                    "CCSG": baseRates.get("CCSG"),
+                    "CNSF": baseRates.get("CNSF"),
+                    "address": reqEmp["address"],
+                    "salary_base": reqEmp["salary"],
+                    "position": reqEmp["position"],
+                    "category": reqEmp["employee_category"],
+                    "dept_name": reqEmp["dept_name"],
+                    "travel_cost": Number(reqEmp["travel_cost"]),
+                    "bank_account_number": reqEmp["bank_account_number"],
                 },
                 success: function(data){
                     alert(data);

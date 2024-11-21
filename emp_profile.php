@@ -236,6 +236,7 @@ $yearsOfService = $hireDate->diff($currentDate)->y;
             <tr>
                 <th>Pay Date</th>
                 <th>Amount (Rs)</th>
+                <th></th>
             </tr>
         </table>
 
@@ -275,7 +276,7 @@ $yearsOfService = $hireDate->diff($currentDate)->y;
             const year = $('#payroll-year').val();
 
             $.ajax({
-                url: 'fetch_payroll.php',
+                url: 'fetch_payrolls.php',
                 type: 'GET',
                 data: {
                     id: <?php echo $id; ?>,
