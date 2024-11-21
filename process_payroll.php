@@ -36,6 +36,9 @@
     </header>
 
     <main>
+        <section class="back_holder">
+            <button class="back" onclick="goBack();">Back</button>
+        </section>
         <section class="search">
             <label for="Employee Name">Input Employee Name</label>
             <input id="Employee Name" type="text" name="Employee Name" onchange="generatePayslip();">
@@ -432,8 +435,10 @@
                 }
             })
 
-            
+        }
 
+        function goBack(){
+            window.history.back();
         }
 
         function setRate(name){
