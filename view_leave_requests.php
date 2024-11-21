@@ -216,6 +216,7 @@ $result = $conn->query($sql);
             ?>
         </tbody>
     </table>
+    <button class="back-button" onclick="history.back(); return false;">Back</button>
 </div>
 
 </body>
