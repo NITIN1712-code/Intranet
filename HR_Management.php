@@ -156,8 +156,7 @@
                     <p>Manage employee information and records.</p>
                     <ul>
                         <li><a href="add_emp.php">Add New Employee</a></li>
-                        <li><a href="view_emp.php">View And Edit Employees</a></li>
-                        <li><a href="delete_emp.php">Delete Employee</a></li>
+                        <li><a href="view_emp.php">View, Edit And Delete Employees</a></li>
                         <li><a href="add_review.php">Add Employee Performance Review</a></li>
                     </ul>
                 </div>
