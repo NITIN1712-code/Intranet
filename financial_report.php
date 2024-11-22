@@ -142,6 +142,27 @@ foreach ($monthly_data as $month => $data) {
         align-items: center;
     }
 
+
+            /* Header */
+            header {
+            background-color: #ffffff;
+            color: #00a88f;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        .logo {
+            max-width: 150px;
+            height: auto;
+        }
+
+        header img {
+            max-width: 100px;
+            height: auto;
+        }
+
     h2 {
         font-size: 28px;
         margin-bottom: 20px;
@@ -191,7 +212,7 @@ foreach ($monthly_data as $month => $data) {
 
     button {
         padding: 5px 10px;
-        background-color: #007acc;
+        background-color:  #00a88f;
         color: #fff;
         border: none;
         border-radius: 4px;
@@ -294,7 +315,12 @@ foreach ($monthly_data as $month => $data) {
 </head>
 <body>
 
-<h2>Financial Report - Yearly Analytics</h2>
+<header>
+    <img src="images/g2.jpg" alt="Explore Mauritius Logo" class="logo" />
+</header>
+
+<h2 style="color: #00a88f;">Financial Report - Yearly Analytics</h2>
+
 
 <form method="get">
     <label for="year">Select Year: </label>
@@ -365,6 +391,13 @@ foreach ($monthly_data as $month => $data) {
 
 
 <div id="profitChart"></div>
+
+<!-- Back Button -->
+<div style="margin-top: 20px;">
+    <button onclick="history.back()" style="padding: 10px 20px; background-color: #007acc; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+        Back
+    </button>
+</div>
 
 <script>
    
