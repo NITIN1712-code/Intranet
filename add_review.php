@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $dateLogged = date('Y-m-d');  // Current date
 
     // Prepare and execute the SQL statement
-    $stmt = $conn->prepare("INSERT INTO employee_reviwes (employee_id, dateLogged, description) VALUES (?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO employee_reviews (employee_id, dateLogged, description) VALUES (?, ?, ?)");
     $stmt->bind_param("iss", $employee_id, $dateLogged, $description);
 
     if ($stmt->execute()) {

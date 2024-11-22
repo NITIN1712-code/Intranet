@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $selected_year = $year;
 
     // Query to get the reviews for the selected employee and month/year
-    $stmt = $conn->prepare("SELECT description, dateLogged FROM employee_reviwes WHERE employee_id = ? AND MONTH(dateLogged) = ? AND YEAR(dateLogged) = ?");
+    $stmt = $conn->prepare("SELECT description, dateLogged FROM employee_reviews WHERE employee_id = ? AND MONTH(dateLogged) = ? AND YEAR(dateLogged) = ?");
     $stmt->bind_param("iii", $employee_id, $month, $year);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -188,7 +188,7 @@ $conn->close();
 
 <div class="container">
     <div class="form-container">
-        <h2>View Employee Performance Review for <?php echo $selected_month ? $monthNames[$selected_month] . ' ' . $selected_year : date('F Y'); ?></h2>
+        <h2>View Employee Performance Review</h2>
 
         <!-- Form starts here -->
         <form method="POST" action="">
