@@ -8,10 +8,43 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
+
+
+<style>
+
+
+        /* Header */
+        header {
+            background-color: #ffffff;
+            color: #00a88f;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        .logo {
+            max-width: 150px;
+            height: auto;
+        }
+
+        header img {
+            max-width: 100px;
+            height: auto;
+        }
+
+</style>
 </head>
+
+
 <body>
 
     <script>
+
+
+
         var empdatas;
         const baseRates = new Map([
             ["CSG", 1.5/100],
@@ -32,8 +65,10 @@
     </script>
     
     <header>
-        <h1>Processing Payroll</h1>
-    </header>
+    <img src="images/g2.jpg" alt="Explore Mauritius Logo" class="logo" />
+    <h1>Process Payroll</h1>
+</header>
+
 
     <main>
         <section class="back_holder">
