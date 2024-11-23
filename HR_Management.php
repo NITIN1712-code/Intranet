@@ -184,6 +184,7 @@
                     <h3>Reports</h3>
                     <p>Generate HR-related reports and analytics.</p>
                     <ul>
+                    <li><a href="attendance.php">Attendance</a></li>
                         <li><a href="attendance_report.php">Attendance Report</a></li>
                         <li><a href="view_performance.php">Performance Report</a></li>
                     </ul>
