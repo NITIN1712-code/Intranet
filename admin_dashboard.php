@@ -173,6 +173,7 @@
                     <p>Manage HR-related tasks here</p>
                     <ul class="options">
                         <li><a href="HR_Management.php">Access Human Resources Page</a></li>
+                        <li><a href="attendance.php">Attendance Page</a></li>
                     </ul>
                 </div>
 
