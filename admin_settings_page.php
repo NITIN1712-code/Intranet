@@ -137,19 +137,11 @@
 
         <br>
 
-        <!-- Payslip Logo Form -->
-        <form action="settings_change.php" method="POST" enctype="multipart/form-data">
-            <label for="payslip_logo">(This will delete the current logo) Insert Payslip Logo:</label>
-            <input type="file" id="payslip_logo" name="payslip_logo">
-            <input type="submit" value="Edit" name="psl">
-        </form>
-
-        <br>
-
         <!-- Main Logo Form -->
         <form action="settings_change.php" method="POST" enctype="multipart/form-data">
-            <label for="main_logo">(This will delete the current logo) Insert Main Logo:</label>
+            <label for="main_logo">(This will delete the current logo) Change Main Logo:</label>
             <input type="file" id="main_logo" name="main_logo">
+            <img src="images\g2.jpg" alt="" style="width: 200px; margin-left:200px">
             <input type="submit" value="Edit" name="ml">
         </form>
 
