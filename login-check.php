@@ -43,6 +43,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
         mysqli_stmt_execute($empStmt);
         $empRes = mysqli_stmt_get_result($empStmt);
         while($row = mysqli_fetch_assoc($empRes)){
+            echo password_verify($pass, $row["password"]);
             if(password_verify($pass, $row["password"])){
                 $_SESSION["id"] = $row["id"];
                 header("Location: home.php");
@@ -50,6 +51,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
                 break;
             }
         }
+        echo "Not Found";
         $conn -> close();
         exit();
 

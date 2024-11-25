@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $dateLogged = date('Y-m-d');  // Current date
 
     // Prepare and execute the SQL statement
-    $stmt = $conn->prepare("INSERT INTO employee_reviwes (employee_id, dateLogged, description) VALUES (?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO employee_reviews (employee_id, dateLogged, description) VALUES (?, ?, ?)");
     $stmt->bind_param("iss", $employee_id, $dateLogged, $description);
 
     if ($stmt->execute()) {
@@ -122,6 +122,41 @@ $conn->close();
             margin-top: 20px;
         }
 
+
+        button,
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #00a88f;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover,
+        input[type="submit"]:hover {
+            background-color: #008f76;
+        }
+
+        .back-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #cccccc;
+            border: none;
+            border-radius: 5px;
+            color: black;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #b3b3b3;
+        }
     </style>
 </head>
 <body>
@@ -151,6 +186,7 @@ $conn->close();
             <textarea name="description" id="description" maxlength="255" required></textarea>
 
             <button type="submit">Submit Review</button>
+            <button class="back-button" onclick="history.back(); return false;">Back</button>
         </form>
 
         <!-- Success or Error message -->

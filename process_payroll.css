@@ -2,16 +2,19 @@
     display: flex;
     justify-content: center;
     margin-top: 50px;
+    background-color: #ffffff;
 }
 
 button{
     width: 100px;
     height: 50px;
+    cursor: pointer;
 }
 
 .pdfElement{
     width: 784px;
     height: 1123px;
+    background-color: rgb(240, 244, 248);
 }
 .companyDetails{
     margin-top: 70px;
@@ -31,6 +34,7 @@ button{
 .companyDetails img{
     width: 140px;
     height: 68px;
+    object-fit: contain;
 }
 
 .employeeDetails{
@@ -105,10 +109,35 @@ th{
 }
 
 
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+}
+
+header h1 {
+    font-size: 28px;
+    color: #0056b3;
+}
+
+.back_holder{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    & button{
+        margin-left: 5px;
+        height: 36px;
+    }
+}
+
 
 .search{
     display: flex;
     justify-content: center;
+    margin-top: 20px;
 
     & label{
         font-family: Arial, Helvetica, sans-serif;
@@ -117,14 +146,49 @@ th{
         line-height: 30px;
     }
 
+    & select {
+        margin-left: 5px;
+        border-radius: 20px;
+        border-width: 1px;
+        text-align: center;
+    }
+
     & input{
         height: 30px;
+        border-radius: 20px;
+        border-width: 1px;
+        text-align: center;
     }
 
     & button{
         margin-left: 5px;
         height: 36px;
     }
+}
+
+.download_button{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #ccc;
+    font-size: 14px;
+    color: #888;
+}
+
+
+button{
+    background-color: #0056b3;;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    border: none;
+    border-radius: 20px;
 }
 
 

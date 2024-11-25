@@ -38,20 +38,6 @@
         exit();
     }
 
-    if(isset($_POST["psl"])){
-        $imagePath = "images/";
-        $target_file = $imagePath . "payslip_logo.png";
-
-        if(file_exists($target_file)){
-            unlink($target_file);
-        }
-
-        if(move_uploaded_file($_FILES["payslip_logo"]["tmp_name"], $target_file)){
-            echo "Successfully updated payslip Logo!";
-        }
-        exit();
-    }
-
     if(isset($_POST["ml"])){
         $imagePath = "images/";
         $target_file = $imagePath . "g2.jpg";

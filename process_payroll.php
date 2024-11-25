@@ -8,10 +8,43 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
+
+
+<style>
+
+
+        /* Header */
+        header {
+            background-color: #ffffff;
+            color: #00a88f;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        .logo {
+            max-width: 150px;
+            height: auto;
+        }
+
+        header img {
+            max-width: 100px;
+            height: auto;
+        }
+
+</style>
 </head>
+
+
 <body>
 
     <script>
+
+
+
         var empdatas;
         const baseRates = new Map([
             ["CSG", 1.5/100],
@@ -32,14 +65,19 @@
     </script>
     
     <header>
-        <h1>Processing Payroll</h1>
-    </header>
+    <img src="images/g2.jpg" alt="Explore Mauritius Logo" class="logo" />
+    <h1>Process Payroll</h1>
+</header>
+
 
     <main>
+        <section class="back_holder">
+            <button class="back" onclick="goBack();">Back</button>
+        </section>
         <section class="search">
             <label for="Employee Name">Input Employee Name</label>
             <input id="Employee Name" type="text" name="Employee Name" onchange="generatePayslip();">
-            <select name="Employee_Dropdown" id="Employee_Dropdown">
+            <select name="Employee_Dropdown" id="Employee_Dropdown" style="display:none;">
                 <option value=""></option>
             </select>
             <button onclick="fillDoc();">Fill Form</button>
@@ -47,7 +85,7 @@
         <section class = "holder">
             <div class="pdfElement" id="payslip">
                 <div class="companyDetails">
-                    <img src="images/payslip_logo.png">
+                    <img src="images/g2.jpg">
                     <div class="locationDetails">
                         <h4 id="comp_name">
                         </h4>
@@ -262,7 +300,7 @@
                 </div>
             </div>
         </section>
-        <section>
+        <section class = "download_button">
             <button onclick="payslipPdf();">Save And Send</button>
         </section>
     </main>
@@ -296,10 +334,12 @@
                 },
                 success: function(data){
                     var dropdown = document.getElementById("Employee_Dropdown");
+                    document.getElementById("Employee_Dropdown").style.display = "none";
                     if(data == "ND"){
                         dropdown.innerHTML = "";
                         return;
                     }
+                    document.getElementById("Employee_Dropdown").style.display = "block";
                     empdatas = JSON.parse(data);
                     var dropdownstring = ""
                     for(const empData of empdatas){
@@ -317,9 +357,6 @@
             if(document.getElementById("deductions").value == ""){
                 document.getElementById("deductions").value = 0;
             }
-            //setRate("PRFG");
-            //setRate("CCSG");
-            //setRate("CNSF");
 
             var val = document.getElementById("Employee_Dropdown").value;
             if(val == ""){
@@ -387,35 +424,56 @@
             issdEle.innerHTML = d.toISOString().split('T')[0];
             travelRateEle.innerHTML = Number(reqEmp["travel_cost"]);
             bankAccEle.innerHTML = reqEmp["bank_account_number"];
-            //to set days
 
-            salaryTotalEle.innerHTML = salaryBase;
-            totalSalaryEle.innerHTML = salaryBase;
 
-            nsfCostEle.innerHTML = (curRates.get("NSF") * salaryBase).toFixed(2);
-            csgCostEle.innerHTML = (curRates.get("CSG") * salaryBase).toFixed(2);
+            $.ajax({
+                url: "get_days.php",
+                type: "GET",
+                data: {
+                    "id": val,
+                    "month": d.getMonth()+1,
+                },
+                success: function(response){
+                    travelDaysEle.innerHTML = response;
             
-            var ded = Number(document.getElementById("deductions").value);
-            var totded = Number(nsfCostEle.innerHTML) + Number(csgCostEle.innerHTML) + ded;
+                    var totalTravelCost = Number(reqEmp["travel_cost"]) * response;
+                    travelCostEle.innerHTML = totalTravelCost.toFixed(2);
 
-            totSalDec.innerHTML = totded.toFixed(2);
+                    var salaryTotal = Number(salaryBase) + Number(totalTravelCost);
 
-            var netPay = salaryBase - totded;
+                    salaryTotalEle.innerHTML = salaryBase;
+                    totalSalaryEle.innerHTML = salaryTotal.toFixed(2);
 
-            netSalEle.innerHTML = netPay.toFixed(2);
+                    nsfCostEle.innerHTML = (curRates.get("NSF") * salaryTotal).toFixed(2);
+                    csgCostEle.innerHTML = (curRates.get("CSG") * salaryTotal).toFixed(2);
+                    
+                    var ded = Number(document.getElementById("deductions").value);
+                    var totded = Number(nsfCostEle.innerHTML) + Number(csgCostEle.innerHTML) + ded;
 
-            var prgf = (salaryBase * baseRates.get("PRFG")).toFixed(2);
-            var ccsg = (salaryBase * baseRates.get("CCSG")).toFixed(2);
-            var cnsf = (salaryBase * baseRates.get("CNSF")).toFixed(2);
+                    totSalDec.innerHTML = totded.toFixed(2);
 
-            prgfCost.innerHTML = prgf;
-            ccsgCost.innerHTML = ccsg;
-            cnsfCost.innerHTML = cnsf;
+                    var netPay = salaryTotal - totded;
 
-            netPayEle.innerHTML = (Number(prgf)+Number(ccsg)+Number(cnsf)).toFixed(2);
+                    netSalEle.innerHTML = netPay.toFixed(2);
 
-            totalSalPaidEle.innerHTML = netPay;
+                    var prgf = (salaryTotal * baseRates.get("PRFG")).toFixed(2);
+                    var ccsg = (salaryTotal * baseRates.get("CCSG")).toFixed(2);
+                    var cnsf = (salaryTotal * baseRates.get("CNSF")).toFixed(2);
 
+                    prgfCost.innerHTML = prgf;
+                    ccsgCost.innerHTML = ccsg;
+                    cnsfCost.innerHTML = cnsf;
+
+                    netPayEle.innerHTML = (Number(prgf)+Number(ccsg)+Number(cnsf)).toFixed(2);
+
+                    totalSalPaidEle.innerHTML = netPay.toFixed(2);
+                }
+            })
+
+        }
+
+        function goBack(){
+            window.history.back();
         }
 
         function setRate(name){
@@ -459,6 +517,14 @@
 
             alert("Sending Mail...");
 
+            var reqEmp;
+            for(const empData of empdatas){
+                if(empData["id"] == document.getElementById("Employee_Dropdown").value){
+                    reqEmp = empData;
+                    break;
+                }
+            }
+
             $.ajax({
                 url: "save_mail_payslip.php",
                 type: "POST",
@@ -467,6 +533,18 @@
                     "id" : document.getElementById("Employee_Dropdown").value,
                     "pay_amount": document.getElementById("totalSalaryPaid").innerHTML,
                     "date": document.getElementById("IssDate").innerHTML,
+                    "NSF": curRates.get("NSF"),
+                    "CSG": curRates.get("CSG"),
+                    "prgf": baseRates.get("PRFG"),
+                    "CCSG": baseRates.get("CCSG"),
+                    "CNSF": baseRates.get("CNSF"),
+                    "address": reqEmp["address"],
+                    "salary_base": reqEmp["salary"],
+                    "position": reqEmp["position"],
+                    "category": reqEmp["employee_category"],
+                    "dept_name": reqEmp["dept_name"],
+                    "travel_cost": Number(reqEmp["travel_cost"]),
+                    "bank_account_number": reqEmp["bank_account_number"],
                 },
                 success: function(data){
                     alert(data);
