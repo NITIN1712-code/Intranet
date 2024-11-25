@@ -39,11 +39,12 @@ $yearsOfService = $hireDate->diff($currentDate)->y;
     <title>Employee Profile</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
-        /* General Page Styling */
+    
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f8;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e9f5f9;
             margin: 0;
+            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -51,63 +52,78 @@ $yearsOfService = $hireDate->diff($currentDate)->y;
         }
 
         h1 {
-            color: #00a88f; /* Greenish Blue */
+            color: #005f73; 
             text-align: center;
             margin: 0;
-            font-size: 28px;
+            font-size: 32px;
             padding: 10px;
         }
 
-        /* Header Styling */
-        header {
-            background-color: #ffffff; /* White */
-            color: #00a88f; /* Greenish Blue */
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
+       
 
-        header .logo-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 15px;
-        }
+header {
+    background-color: #005f73; 
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: relative; 
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
 
-        header img {
-            max-width: 200px;
-            height: auto;
-        }
 
-        header h1 {
-            margin-top: 10px;
-            font-size: 28px;
-            font-weight: bold;
-            color: #00a88f;
-        }
+.logo-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    flex-grow: 1;
+    margin-right: 100px;
+}
 
-        /* Container for the Profile Info */
+
+.back-button {
+    position: absolute;
+    top: 20px; 
+    right: 20px; 
+    background-color: #005f73;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: #014f63; 
+}
+
+header img {
+    max-width: 150px; 
+    height: auto;
+}
+
+
+header h1 {
+    font-size: 24px; 
+    margin-top: 10px; 
+}
+
+
+    
         .profile-container {
             width: 90%;
             max-width: 1200px;
-            margin-top: 40px;
+            margin-top: 120px; 
             padding: 20px;
             background-color: #ffffff;
-            border-radius: 8px;
+            border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow-x: auto;
         }
 
-        /* Table Styling */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -123,7 +139,7 @@ $yearsOfService = $hireDate->diff($currentDate)->y;
         }
 
         th {
-            background-color: #00a88f;
+            background-color: #005f73;
             color: white;
             font-weight: bold;
             text-transform: uppercase;
@@ -132,8 +148,6 @@ $yearsOfService = $hireDate->diff($currentDate)->y;
         td {
             background-color: #f9f9f9;
         }
-
-        /* Action Button Styling */
         td a {
             display: inline-block;
             padding: 8px 12px;
@@ -144,20 +158,19 @@ $yearsOfService = $hireDate->diff($currentDate)->y;
         }
 
         td a[href*='accept.php'] {
-            background-color: #28a745; /* Green for Approve */
+            background-color: #28a745; 
         }
 
         td a[href*='reject.php'] {
-            background-color: #dc3545; /* Red for Reject */
+            background-color: #dc3545;
         }
 
         td a:hover {
             opacity: 0.8;
         }
 
-        /* Back Button Styling */
         .back-button {
-            background-color: #00a88f;
+            background-color: #005f73;
             color: white;
             padding: 8px 15px;
             border-radius: 5px;
@@ -167,11 +180,52 @@ $yearsOfService = $hireDate->diff($currentDate)->y;
             transition: background-color 0.3s;
         }
 
+ul li a {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #005f73; 
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px; 
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+ul li a:hover {
+    background-color: #014f63;
+    transform: scale(1.05); 
+}
+
+ul li a:active {
+    background-color: #003c48; 
+    transform: scale(1); 
+}
+
+
         .back-button:hover {
-            background-color: #008f76;
+            background-color: #014f63;
         }
 
-        /* Responsive Design */
+
+        select, button {
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #005f73;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #014f63;
+        }
+
+   
         @media (max-width: 768px) {
             body {
                 padding-top: 20px;
@@ -185,18 +239,25 @@ $yearsOfService = $hireDate->diff($currentDate)->y;
                 font-size: 14px;
             }
         }
+
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <img src="images/Connectitcut.png" alt="Logo">
-            <h1>Welcome to Your Profile</h1>
-        </div>
-    </header>
+<header>
+    <div class="logo-container">
+        <img src="images/Connectitcut.png" alt="Logo">
+        <p><strong>Wlcome to your profile</strong> <?php echo htmlspecialchars($employee['first_name'] . " " . $employee['last_name']); ?></p>
+        <h1>Welcome to Your Profile</h1>
+    </div>
+
+    <a href="javascript:history.back()" class="back-button">Back</a>
+</header>
+
+
+
 
     <div class="profile-container">
-        <h2>Welcome, <?php echo htmlspecialchars($employee['first_name']) . " " . htmlspecialchars($employee['last_name']); ?>!</h2>
+      
         <p><strong>Name:</strong> <?php echo htmlspecialchars($employee['first_name'] . " " . $employee['last_name']); ?></p>
         <p><strong>Position:</strong> <?php echo htmlspecialchars($employee['position']); ?></p>
         <p><strong>Email:</strong> <?php echo htmlspecialchars($employee['email']); ?></p>
@@ -270,43 +331,4 @@ $yearsOfService = $hireDate->diff($currentDate)->y;
     </div>
 
     <script>
-       
-        $('#filter-payroll').click(function() {
-            const month = $('#payroll-month').val();
-            const year = $('#payroll-year').val();
-
-            $.ajax({
-                url: 'fetch_payrolls.php',
-                type: 'GET',
-                data: {
-                    id: <?php echo $id; ?>,
-                    month: month,
-                    year: year
-                },
-                success: function(response) {
-                    $('#payroll-table').html(response);
-                }
-            });
-        });
-
-    
-        $('#filter-leave').click(function() {
-            const month = $('#leave-month').val();
-            const year = $('#leave-year').val();
-
-            $.ajax({
-                url: 'fetch_leaves.php',
-                type: 'GET',
-                data: {
-                    id: <?php echo $id; ?>,
-                    month: month,
-                    year: year
-                },
-                success: function(response) {
-                    $('#leave-table').html(response);
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+        $('#filter-payroll').click

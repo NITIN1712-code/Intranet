@@ -125,6 +125,7 @@
             </div>
             <button type="submit" class="submit-button">Submit Leave Request</button>
         </form>
+        
     </section>
 </div>
 
