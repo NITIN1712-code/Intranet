@@ -87,6 +87,7 @@
     <script>
         var emps;
     </script>
+    <a href="javascript:history.back()" class="back">Back</a>
     <table id = "tab">
         <tr>
             <th>Employee ID</th>
@@ -116,7 +117,7 @@
                     if(element["check"] == "pending"){
                         buttons.innerHTML = "<div><button onclick='onPress("+element["id"]+",`present`);'>Present</button><button onclick='onPress("+element["id"]+",`absent`);'>Absent</button></div>"
                     }else{
-                        buttons.innerHTML = "<h3>"+element["check"]+"<h3>"
+                        buttons.innerHTML = "<h4 class="+element["check"]+">"+element["check"]+"<h4>"
                     }
                     id.innerHTML = element["id"];
                     name.innerHTML = element["first_name"] + " " + element["last_name"];
